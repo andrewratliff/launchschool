@@ -1,1 +1,1 @@
-Coursework for [LaunchSchool](launchschool.com)
+Coursework for [Launch School](http://www.launchschool.com)
