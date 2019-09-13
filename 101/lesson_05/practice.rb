@@ -131,3 +131,102 @@ end
 # p new_arr
 
 arr = [[2], [3, 5, 7], [9], [11, 13, 15]]
+
+new_arr = arr.map do |sub_arr|
+  sub_arr.select do |element|
+    (element % 3).zero?
+  end
+end
+
+# p arr
+# p new_arr
+
+arr = [[:a, 1], ['b', 'two'], ['sea', {c: 3}], [{a: 1, b: 2, c: 3, d: 4}, 'D']]
+# expected return value: {:a=>1, "b"=>"two", "sea"=>{:c=>3}, {:a=>1, :b=>2, :c=>3, :d=>4}=>"D"}
+
+hsh = arr.each_with_object({}) do |element, hash|
+  k, v = element
+  hash[k] = v
+end
+
+# p hsh
+
+arr = [[1, 6, 7], [1, 4, 9], [1, 8, 3]]
+
+sorted_arr = arr.sort do |a, b|
+  a.reject(&:even?) <=> b.reject(&:even?)
+end
+
+sorted_arr2 = arr.sort_by do |sub_arr|
+  sub_arr.select(&:odd?)
+end
+
+# p sorted_arr
+# p sorted_arr2
+
+hsh = {
+  'grape' => {type: 'fruit', colors: ['red', 'green'], size: 'small'},
+  'carrot' => {type: 'vegetable', colors: ['orange'], size: 'medium'},
+  'apple' => {type: 'fruit', colors: ['red', 'green'], size: 'medium'},
+  'apricot' => {type: 'fruit', colors: ['orange'], size: 'medium'},
+  'marrow' => {type: 'vegetable', colors: ['green'], size: 'large'},
+}
+
+arr = hsh.each_with_object([]) do |(_, attributes), array|
+  type = attributes[:type]
+
+  if type == 'fruit'
+    array.push(attributes[:colors].map(&:capitalize))
+  elsif type == 'vegetable'
+    array.push(attributes[:size].upcase)
+  end
+end
+
+# p arr
+
+def keep_hash?(hash)
+
+end
+
+arr = [{a: [1, 2, 3]}, {b: [2, 4, 6], c: [3, 6], d: [4]}, {e: [8], f: [6, 10]}]
+
+# this one returns all the sub hashes as well which apparently is not the
+# desired output
+new_arr = arr.each_with_object([]) do |hash, array|
+  selections = hash.select do |key, value|
+    value.all?(&:even?)
+  end
+
+  array.push(selections) unless selections.empty?
+end
+
+new_arr2 = arr.select do |hash|
+  hash.all? do |_, value|
+    value.all?(&:even?)
+  end
+end
+
+# p new_arr
+# p new_arr2
+
+def random_hexadecimal
+  (('a'..'f').to_a + ('0'..'9').to_a).sample
+end
+
+def generate_uuid(delimiter = '-')
+  substring_sizes = [8, 4, 4, 4, 12]
+
+  uuid = substring_sizes.map do |size|
+    substring = []
+
+    size.times do
+      substring << random_hexadecimal
+    end
+
+    substring.join
+  end
+
+  uuid.join(delimiter)
+end
+
+p generate_uuid
