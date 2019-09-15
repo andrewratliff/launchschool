@@ -22,6 +22,8 @@ end
 
 def display_board(board)
   system 'clear'
+  puts "You are a #{PLAYER}."
+  puts "Computer is a #{COMPUTER}."
   puts ''
   puts '     |     |'
   puts "  #{board[1]}  |  #{board[2]}  |  #{board[3]}"
@@ -89,17 +91,24 @@ def detect_winner(board)
   winner
 end
 
+def win_condition?(board)
+  board_full?(board) || winner?(board)
+end
+
 loop do
   board = initialize_board
-  display_board(board)
 
   loop do
-    player_moves!(board)
-    computer_moves!(board)
     display_board(board)
 
-    break if board_full?(board) || winner?(board)
+    player_moves!(board)
+    break if win_condition?(board)
+
+    computer_moves!(board)
+    break if win_condition?(board)
   end
+
+  display_board(board)
 
   if winner?(board)
     prompt "#{detect_winner(board)} won!"
@@ -110,3 +119,5 @@ loop do
   prompt 'Do you want to play again? (y/n)'
   break if gets.slice(0).downcase == 'n'
 end
+
+prompt 'Peace'
