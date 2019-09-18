@@ -103,6 +103,7 @@ class RPSGame
     loop do
       human.choose
       computer.choose
+      display_moves
       display_winner
       break unless play_again?
     end
@@ -113,10 +114,12 @@ class RPSGame
     puts 'Welcome to Rock, Paper, Scissors!'
   end
 
-  def display_winner
+  def display_moves
     puts "#{human.name} chose #{human.move}."
     puts "#{computer.name} chose #{computer.move}."
+  end
 
+  def display_winner
     if human.move.beat?(computer.move)
       puts "#{human.name} won!"
     elsif computer.move.beat?(human.move)
