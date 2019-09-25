@@ -169,4 +169,10 @@ class TodoListTest < MiniTest::Test
     assert_equal(new_list.first, @todo1)
     refute_equal(new_list, @list)
   end
+
+  def test_test
+    assert_raises do
+      @list.test
+    end
+  end
 end

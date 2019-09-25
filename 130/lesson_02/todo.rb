@@ -169,10 +169,23 @@ class TodoList
     each(&:undone!)
   end
 
+  def test(str)
+    puts "hi"
+  end
+
   private
 
   attr_accessor :todos
 end
+
+class Cat
+  attr_accessor :name
+  def initialize(name)
+    @name = name
+  end
+end
+
+binding.pry
 
 todo1 = Todo.new("Buy milk")
 todo2 = Todo.new("Clean room")
