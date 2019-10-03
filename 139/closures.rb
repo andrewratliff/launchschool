@@ -1,15 +1,16 @@
 require "pry"
 
-def print_proc(&p)
+test = Proc.new { some_method }
+
+binding.pry
+
+def print_proc(p)
   puts p.call
 end
 
-a = 'hi'
-p = Proc.new do
-  a
+def some_method
+  "asdf"
 end
-
-a = 'hello'
 
 binding.pry
 print_proc(p)

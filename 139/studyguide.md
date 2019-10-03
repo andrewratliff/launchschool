@@ -13,6 +13,7 @@
       scope at the point at which the closure was created
 
 * How blocks work and when we'd want to use them
+  - A block one way Ruby implements the idea of a closure
   - Blocks are chunks of code that live between `{...}` or `do...end`. Blocks
     have lenient arity rules meaning, they don't enforce argument count. The
     return value of a block is based on the last expression in the block.
@@ -20,12 +21,18 @@
     decision.
   - Blocks are also used to perform some kind of before/after actions - sandwich
     code.
+
 * Blocks and variable scope
   - When initialized, a block understands it surrounding context. Local
     variables, method references, and constantants are enclosed in the block's
     binding and can be referenced when the block is executed.
   - inner scopes can access outer scopes
+
 * Write methods that use blocks and procs
+  - When a method definition has a parameter preceded by an `&`, that method is
+    expecting a block (not a proc object)
+  - When a proc object is passed into a method with a preceding `&`, the method
+    will treat it as though it were an ordinary block, not a proc object
 * Methods with an explicit block parameter
 * Arguments and return values with blocks
 * When can you pass a block to a method?
