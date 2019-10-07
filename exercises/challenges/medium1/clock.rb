@@ -2,50 +2,46 @@ require "minitest/autorun"
 require "pry"
 
 class Clock
-  attr_reader :hour, :min
-  def initialize(h, m)
-    @hour = h
-    @min = m
+  attr_accessor :hour, :minute
+
+  HOURS_PER_DAY = 24
+  MINUTES_PER_HOUR = 60
+
+  def initialize(hour, minute)
+    @hour = hour.to_i
+    @minute = minute.to_i
+    normalize
   end
 
-  def self.at(h, m = 0)
-    new(h, m)
+  def self.at(hour, minute = 0)
+    new(hour, minute)
   end
 
   def to_s
-    "#{hour.to_s.rjust(2, '0')}:#{min.to_s.rjust(2, '0')}"
+    format("%02d:%02d", hour, minute)
   end
 
-  def +(m)
-    h, m = m.divmod(60)
-    self.min += m
-    self.hour += h % 24
-    self.hour = hour % 24
-
-    self
+  def +(minutes_to_add)
+    Clock.new(hour, minute + minutes_to_add)
   end
 
-  def -(m)
-    h, m = m.divmod(60)
-    self.min -= m
-    self.hour -= h % 24
-    self.hour = hour % 24
-
-    if min < 0
-      self.hour -= 1
-      self.min = 60 + min
-    end
-
-    self
+  def -(minutes_to_subtract)
+    Clock.new(hour, minute - minutes_to_subtract)
   end
 
   def ==(other)
-    hour == other.hour && min == other.min
+    in_minutes == other.in_minutes
   end
 
+  def in_minutes
+    hour * MINUTES_PER_HOUR + minute
+  end
   private
 
-  attr_writer :hour, :min
+  def normalize
+    self.hour = in_minutes / MINUTES_PER_HOUR % HOURS_PER_DAY
+    self.minute = in_minutes % MINUTES_PER_HOUR
+  end
 end
 
 class ClockTest < Minitest::Test
