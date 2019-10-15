@@ -63,6 +63,13 @@
   - Hierarchical structure allows routers to identify which segments of a
     network are assigned control to another router. Routers don't need to know
     the address of every device on another network
+  - IP is communication between hosts or devices
+  - Ports allow communication between processes
+  - Multiplexing and demultiplexing provide for the transmission of multiple
+    signals over a single channel
+  - Network socket: combination of IP address and port number (communication
+    end-point)
+  - A port is an identifier for a specific process running on a host
 
 * Have an understanding of how DNS works
 * Understand the client-server model of web interactions, and the role of HTTP
@@ -71,7 +78,26 @@
 # TCP & UDP
 * Have a clear understanding of the TCP and UDP protocols, their similarities
   and differences
+  - Both protocols provide data encapsulation and multiplexing
+  - Transmission Control Protocol (TCP)
+    - PDUs are called segments
+    - 3-way handshake
+    - connection-oriented system
+    - reliable by providing
+      - message acknowledgement
+      - retransmission
+      - in-order delivery
+    - flow control
+    - congestion avoidance
+    - downsides
+      - latency overhead when establishing a connection
+      - potential head-of-line blocking as a result of in-order delivery
+  - User Datagram Protocol (UDP)
+    - PDUs are called datagrams
+    - connectionless system
+    - unreliable
 * Have a broad understanding of the three-way handshake and its purpose
+  - used to establish a connection
 * Have a broad understanding of flow control and congestion avoidance
 
 # URLs
