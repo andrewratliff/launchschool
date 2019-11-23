@@ -203,22 +203,71 @@ end
 
 # Fibonacci Numbers (Recursion)
 
-def fib(num, sum = 0, count = 1)
-  puts "***"
-  puts "num: #{num}"
-  puts "sum: #{sum}"
-  puts "count: #{count}"
-  if sum.zero?
-    sum += count
-  else
-    sum += sum
-  end
+def fib(num)
+  return 1 if num <= 2
 
-  return sum if count == num
-
-  count += 1
-  fib(num, sum, count)
+  fib(num - 1) + fib(num - 2)
 end
 
 # puts fib(1)
-puts fib(3)
+# puts fib(12)
+
+def fib(num)
+  return 1 if num <= 2
+  acc1 = 1
+  acc2 = 1
+  results = []
+
+  (num).times do
+    results << acc1
+    old_acc1 = acc1
+    acc1 = acc2
+    acc2 += old_acc1
+  end
+
+  results.last
+end
+
+# LS solution
+
+def fib(nth)
+  first, last = [1, 1]
+  3.upto(nth) do
+    first, last = [last, first + last]
+  end
+
+  last
+end
+
+# puts fib(20) == 6765
+# puts fib(100) == 354224848179261915075
+# puts fib(100_001) # => 4202692702.....8285979669707537501
+
+def fibonacci_last(num)
+  last_2 = [1, 1]
+  3.upto(num) do
+    last_2 = [last_2.last, (last_2.first + last_2.last) % 10]
+  end
+
+  last_2.last
+end
+
+def fib_last(num)
+  last_2 = [1, 1]
+  last_digits = last_2
+  3.upto(60) do
+    last_2 = [last_2.last, (last_2.first + last_2.last) % 10]
+    last_digits << last_2.last
+  end
+
+  return last_digits[num - 1] if num <= 60
+
+  last_digits[(num - 1) % 60]
+end
+
+puts fib_last(15)        # -> 0  (the 15th Fibonacci number is 610)
+puts fib_last(20)        # -> 5 (the 20th Fibonacci number is 6765)
+puts fib_last(100)       # -> 5 (the 100th Fibonacci number is 354224848179261915075)
+puts fib_last(100_001)   # -> 1 (this is a 20899 digit number)
+puts fib_last(1_000_007) # -> 3 (this is a 208989 digit number)
+puts fib_last(123456789) # -> 4
