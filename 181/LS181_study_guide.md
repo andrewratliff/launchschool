@@ -71,6 +71,15 @@
     of data in a dataset. When a primary key is specified in PostgreSQL using
     PRIMARY KEY, PostgreSQL will create an index to enforce uniqueness as well
     as preventing NULL values.
+  - A foreign key can refer to two different things. First, it can refer to a
+    column that references the primary key of a single row in another table.
+    This is a foreign key column and must have the same data type as the primary
+    key column it is referencing. Second, and closely related, it a foreign key
+    constraint. This is a constraint that enforces rules on what data is
+    permitted in a foreign key relationship. A foreign key constraint perserves
+    refrentail integrity of the database by ensuring that every value inserted
+    into the foreign key column exists in the primary key column of the table
+    being referenced.
 
 - Create and remove CHECK constraints from a column
   ``` SQL
@@ -83,6 +92,10 @@
 # Database Design
 
 - Define cardinality and modality
+  - Cardinailty is the number of objects on each side of a relationship.
+  - Modality indicates if the relationship is required or not. A modality of 1
+    means the relationship is required. A modality of 0 means the relationship
+    is optional.
 - Be able to draw database diagrams using crow's foot notation
 
 # Lesson Summaries
