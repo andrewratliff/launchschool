@@ -27,7 +27,7 @@
       }
 
       article {
-        padding: 10px 15px;
+        padding: 10px 15px 15px 15px;
       }
 
       /* header */
@@ -79,7 +79,7 @@
         margin-top: 10px;
       }
 
-      [scope="col"] {
+      table:first-of-type [scope="col"] {
         text-align: right;
       }
 
@@ -89,29 +89,48 @@
 
       /* first table */
 
+      table:first-of-type thead th {
+        border-bottom: 1px solid black;
+      }
+
+      tbody:first-of-type [colspan="2"] {
+        border-top: 1px solid black;
+      }
+
       tbody:first-of-type [colspan="2"] dt {
         font-weight: bold;
       }
 
-      tbody:first-of-type td:last-child {
+      table:first-of-type tbody:first-of-type td:last-child {
         font-weight: bold;
         text-align: right;
+        border-bottom: 1px solid black;
       }
 
-      tbody:nth-of-type(2) td:last-child {
+      table:first-of-type tbody:nth-of-type(2) td:last-child {
         text-align: right;
+        border-bottom: 1px solid black;
       }
 
-      td {
+      table:first-of-type td:nth-of-type(2) {
         border-top: 1px solid black;
+      }
+
+      table:first-of-type tbody:nth-of-type(2) td {
+        border-bottom: 1px solid black;
+      }
+
+      table:first-of-type td {
         padding: 2px 0 ;
       }
 
+      table:first-of-type tfoot td {
+        padding-top: 14px;
+      }
 
       td.indent {
-        text-indent: 10px;
         width: 1rem;
-        border: 0;
+        border-top: none;
       }
 
       table:first-of-type tr:nth-child(9) {
@@ -125,14 +144,45 @@
 
       tfoot td:first-of-type {
         vertical-align: top;
+        text-indent: -0.7rem;
+        padding-left: 0.7rem;
       }
 
       /* second table */
 
-      table:nth-of-type(2) th {
+      table:nth-of-type(2) {
         font-size: 0.8rem;
-        font-weight: normal;
+        margin-top: 12px;
+      }
+
+      table:nth-of-type(2) thead {
         border-bottom: 1px solid black;
+        text-align: left;
+      }
+
+      table:nth-of-type(2) th {
+        text-align: left;
+        font-weight: normal;
+      }
+
+      table:nth-of-type(2) tr > th ~ td {
+          padding: 2px 0;
+      }
+
+      table:nth-of-type(2) thead th:first-of-type {
+        width: 240px;
+      }
+
+      table:nth-of-type(2) th:nth-of-type(2) {
+        width: 136px;
+      }
+
+      table:nth-of-type(2) [scope="row"] {
+        padding-left: 0;
+      }
+
+      th.indent {
+        text-indent: 1.2rem;
       }
     </style>
   </head>
@@ -265,9 +315,8 @@
         </tbody>
         <tfoot>
           <tr>
-            <td>*</td>
-            <td colspan="2">
-              Percent Daily Values are based on a 2,000 calorie diet. Your
+            <td colspan="3">
+              * Percent Daily Values are based on a 2,000 calorie diet. Your
               daily value may be higher or lower depending on your calorie needs.
             </td>
           </tr>
@@ -275,10 +324,51 @@
       </table>
       <table>
         <thead>
-          <th colspan="2">Calories:</th>
-          <th>2,000</th>
-          <th>2,500</th>
+          <tr>
+            <th></th>
+            <th scope="col">Calories:</th>
+            <th scope="col">2,000</th>
+            <th scope="col">2,500</th>
+          </tr>
         </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Total Fat</th>
+            <td>Less than</td>
+            <td>65g</td>
+            <td>80g</td>
+          </tr>
+          <tr>
+            <th scope="row" class="indent">Sat Fat</th>
+            <td>Less than</td>
+            <td>20g</td>
+            <td>25g</td>
+          </tr>
+          <tr>
+            <th scope="row">Cholesterol</th>
+            <td>Less than</td>
+            <td>300mg</td>
+            <td>300mg</td>
+          </tr>
+          <tr>
+            <th scope="row">Sodium</th>
+            <td>Less than</td>
+            <td>2,400mg</td>
+            <td>2,400mg</td>
+          </tr>
+          <tr>
+            <th scope="row">Total Carbohydrate</th>
+            <td></td>
+            <td>300g</td>
+            <td>375g</td>
+          </tr>
+          <tr>
+            <th scope="row" class="indent">Dietary Fiber</th>
+            <td></td>
+            <td>25g</td>
+            <td>30g</td>
+          </tr>
+        </tbody>
       </table>
     </article>
   </body>
