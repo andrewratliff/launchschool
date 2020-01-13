@@ -7,62 +7,231 @@
       fieldset {
         border: none;
       }
+
+      label:hover {
+        cursor: wait;
+      }
     </style>
   </head>
   <body>
-    <form action="/login" method="post">
-      <fieldset>
-        <input type="text" name="username" />
-        <input type="password" name="password" />
-      </fieldset>
-      <fieldset>
-        <input type="submit" value="Save" />
-        <input type="submit" value="Forgot Password" formaction="/forgot" />
-        <textarea type="password"></textarea>
-      </fieldset>
-    </form>
+    <!-- <form action="/login" method="post"> -->
+    <!--   <fieldset> -->
+    <!--     <input type="text" name="username" /> -->
+    <!--     <input type="password" name="password" /> -->
+    <!--   </fieldset> -->
+    <!--   <fieldset> -->
+    <!--     <input type="submit" value="Save" /> -->
+    <!--     <input type="submit" value="Forgot Password" formaction="/forgot" /> -->
+    <!--     <textarea type="password"></textarea> -->
+    <!--   </fieldset> -->
+    <!-- </form> -->
 
-    <form>
-      <input type="password" name="info" />
-      <input type="submit" value="go" />
-    </form>
+    <!-- <form> -->
+    <!--   <input type="password" name="info" /> -->
+    <!--   <input type="submit" value="go" /> -->
+    <!-- </form> -->
 
-    <form>
-      <input type="text" name="city" />
-      <input type="password" name="password" />
-      <input type="submit" value="Save" />
-    </form>
+    <!-- <form> -->
+    <!--   <input type="text" name="city" /> -->
+    <!--   <input type="password" name="password" /> -->
+    <!--   <input type="submit" value="Save" /> -->
+    <!-- </form> -->
 
-    <form>
-      <label for="phone">Phone</label>
-      <input type="text" id="phone" name="phone_number" />
-    </form>
+    <!-- <form> -->
+    <!--   <label for="phone">Phone</label> -->
+    <!--   <input type="text" id="phone" name="phone_number" /> -->
+    <!-- </form> -->
 
-    <label>
-      Phone
-      <input type="text" name="phone" />
-    </label>
+    <!-- <label> -->
+    <!--   Phone -->
+    <!--   <input type="text" name="phone" /> -->
+    <!-- </label> -->
+
+    <!-- <form action="#" method="post"> -->
+    <!--   <fieldset> -->
+    <!--     <h1>Log In</h1> -->
+    <!--     <label for="username">Username</label> -->
+    <!--     <input type="text" name="username" id="username" /> -->
+
+    <!--     <label for="password">Password</label> -->
+    <!--     <input type="password" name="password" id="password" /> -->
+
+    <!--     <input type="submit" value="Log In" /> -->
+    <!--     <input type="submit" value="Delete account" formaction="/account/delete" /> -->
+    <!--     <input type="submit" value="Forgot password" formaction="/account/password" /> -->
+    <!--     <input type="reset" value="Reset" /> -->
+    <!--   </fieldset> -->
+    <!-- </form> -->
+
+    <!-- <form action="#" method="post"> -->
+    <!--   <fieldset> -->
+    <!--     <h1>Log In</h1> -->
+    <!--     <fieldset> -->
+    <!--       <label for="username">Username</label> -->
+    <!--       <input type="text" name="username" id="username" /> -->
+    <!--     </fieldset> -->
+
+    <!--     <fieldset> -->
+    <!--       <label for="password">Password</label> -->
+    <!--       <input type="password" name="password" id="password" /> -->
+    <!--     </fieldset> -->
+
+    <!--     <fieldset> -->
+    <!--       <input type="submit" value="Log In" /> -->
+    <!--       <input type="submit" value="Delete account" formaction="/account/delete" /> -->
+    <!--       <input type="submit" value="Forgot password" formaction="/account/password" /> -->
+    <!--       <input type="reset" value="Reset" /> -->
+    <!--     </fieldset> -->
+    <!--   </fieldset> -->
+    <!-- </form> -->
 
     <form action="#" method="post">
       <fieldset>
-        <h1>Log In</h1>
-        <fieldset>
-          <label for="username">Username</label>
-          <input type="text" name="username" id="username" />
-        </fieldset>
-
-        <fieldset>
-          <label for="password">Password</label>
-          <input type="password" name="password" id="password" />
-        </fieldset>
-
-        <fieldset>
-          <input type="file" id="start" name="start" />
-          <input type="submit" value="Delete account" formaction="/account/delete" />
-          <input type="submit" value="Forgot password" formaction="/account/password" />
-          <input type="reset" value="Reset" />
-        </fieldset>
+        <label>
+          First Name
+          <input type="text" name="first_name" value="Tom Thumb" />
+        </label>
       </fieldset>
     </form>
+
+    <form action="#" method="post">
+      <fieldset>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" maxlength="5"
+        size="50" />
+      </fieldset>
+    </form>
+
+    <form action="#" method="post">
+      <fieldset>
+        <label>
+          Email
+          <input type="email" name="email" placeholder="you@domain" />
+          <input type="submit" value="Send it" />
+        </label>
+      </fieldset>
+    </form>
+
+    <form action="#" method="post">
+      <fieldset>
+        <label for="phone_number">Phone</label>
+        <input type="phone" id="phone_number" placeholder="(###) ###-####" />
+
+        <label>
+          Other Phone
+          <input type="phone" placeholder="123456789" />
+        </label>
+      </fieldset>
+    </form>
+
+    <form action="#" method="post">
+      <fieldset>
+        <label>
+          <input type="checkbox" name="choice" value="search" />
+          Sort search results
+        </label>
+
+        <input type="checkbox" id="google_search" name="choice" value="google" />
+        <label for="google_search">Search on Google</label>
+
+        <label>
+          <input type="checkbox" name="choice" value="recent" checked disabled
+          readonly />
+          Recent results (within last year)
+        </label>
+      </fieldset>
+    </form>
+
+    <form action="#" method="post">
+      <fieldset>
+        <label>
+          <input type="radio" name="color" value="red" />
+          Red
+        </label>
+
+        <label>
+          <input type="radio" name="color" value="blue" checked />
+          Blue
+        </label>
+
+        <label>
+          <input type="radio" name="color" value="green" />
+          Green
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <label>
+          Pick em
+          <select>
+            <option value="">Choose</option>
+            <option value="dog">Dog</option>
+            <option value="cat">Cat</option>
+          </select>
+        </label>
+      </fieldset>
+    </form>
+
+    <form action="#" method="post">
+      <fieldset>
+        <input type="submit" value="Save" />
+      </fieldset>
+    </form>
+
+    <form action="#" method="post">
+      <fieldset>
+        <input type="reset" value"Clear Form" />
+      </fieldset>
+    </form>
+
+    <form action="#" method="post">
+      <fieldset>
+        <label>
+          Email
+          <input type="email" name="email" value="xyz@example.com" />
+        </label>
+        <br />
+        <input type="submit" value="Save" disabled />
+      </fieldset>
+    </form>
+
+    <form action="#" method="post">
+      <fieldset>
+        Text area
+        <textarea name="textarea">asdfkajsfl;jaslkfj </textarea>
+      </fieldset>
+    </form>
+
+    <form action="#" method="post">
+      <fieldset>
+        Text area 2
+        <textarea name="textarea2" rows="10" cols="1"></textarea>
+      </fieldset>
+    </form>
+
+    <form action="#" method="post">
+      <fieldset>
+        <select name="color">
+          <option value="" disabled selected>Pick a color:</option>
+          <option value="#f00">Red</option>
+          <option value="#0f0">Green</option>
+          <option value="#00f">Blue</option>
+        </select>
+      </fieldset>
+    </form>
+
+    <form action="#" method="post">
+      <fieldset>
+        <select name="colors" multiple size="6">
+          <option value="" disabled>Pick some colors:</option>
+          <option value="#f00">Red</option>
+          <option value="#0f0">Green</option>
+          <option value="#00f">Blue</option>
+          <option value="#0ff">Cyan</option>
+          <option value="#fff">White</option>
+        </select>
+      </fieldset>
+    </form>
+
   </body>
 </html>
