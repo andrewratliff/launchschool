@@ -3,52 +3,32 @@
   <head>
     <meta charset="utf-8" />
     <title>Contact Form</title>
-    <style>
-
-      fieldset {
-        border: none;
-        margin: 0 auto;
-        width: 600px;
-      }
-
-      dt {
-        margin-top: 20px;
-        margin-bottom: 10px;
-      }
-
-      dd {
-        margin-left: 0;
-      }
-
-      dd input {
-        width: 100%;
-      }
-
-      ul {
-        padding: 0;
-      }
-
-      li {
-        list-style: none;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <form action="#" method="post">
       <fieldset>
-        <dl>
+        <dl class="partial">
           <dt><label for="first_name">First Name</label></dt>
           <dd><input type="text" id="first_name" name="first_name" /></dd>
-
+        </dl><!--
+        --><dl class="partial last-name">
           <dt><label for="last_name">Last Name</label></dt>
           <dd><input type="text" id="last_name" name="last_name" /></dd>
+        </dl>
 
+        <dl>
           <dt><label for="email">Email Address</label></dt>
           <dd><input type="email" id="email" name="email" placeholder="you@example.com" /></dd>
+        </dl>
+      </fieldset>
 
+      <fieldset>
+        <dl class="partial city">
           <dt><label for="city">City</label></dt>
           <dd><input type="text" id="city" name="city" /></dd>
-
+        </dl><!--
+        --><dl class="partial state">
           <dt><label for="state">State</label></dt>
           <dd>
           <select id="state" name="state">
@@ -105,11 +85,14 @@
             <option>WY</option>
           </select>
           </dd>
-
+        </dl><!--
+        --><dl class="partial zipcode">
           <dt><label for="zipcode">Zipcode</label></dt>
           <dd><input type="text" id="zipcode" name="zipcode" pattern="[0-9]{5}" placeholder="#####" /></dd>
         </dl>
+      </fieldset>
 
+      <fieldset>
         <p>Which of these colors do you like the best?</p>
         <ul>
           <li>
@@ -150,8 +133,10 @@
           </li>
         </ul>
 
-        <label for="comments">Comments</label>
-        <textarea id="comments" name="comments" rows="6" cols="80"></textarea>
+        <dl>
+          <dt><label for="comments">Comments</label></dt>
+          <dd><textarea id="comments" name="comments" rows="6" cols="80"></textarea></dd>
+        </dl>
 
         <input type="hidden" name="date" value="2020-01-15" />
 
