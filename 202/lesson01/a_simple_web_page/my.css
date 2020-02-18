@@ -1,18 +1,25 @@
+/*     Font size for paragraphs: 24px */
+/*     Color for final 2 paragraphs: gray */
+/*     Color for the heading: orange */
+/*     Color for important text: blue */
+/*     Color for emphasized text: red */
+/*     Background color: #ffffe0 */
+
 body {
   background-color: #ffffe0;
 }
 
-h1 {
-  color: orange;
-  text-align: center;
+p {
+  font-size: 24px;
 }
 
 .more-text {
   color: gray;
 }
 
-#final-paragraph {
-  text-decoration: underline;
+h1 {
+  color: orange;
+  text-align: center;
 }
 
 strong {
@@ -24,6 +31,6 @@ em {
   color: red;
 }
 
-p {
-  font-size: 24px;
+#final-paragraph {
+  text-decoration: underline;
 }

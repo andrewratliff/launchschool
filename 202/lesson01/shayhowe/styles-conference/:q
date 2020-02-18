@@ -55,5 +55,5 @@ section.test {
 }
 
 .test {
-  background-color: hsl(14, 100%, 50%);
+  background-color: hsla(14, 100%, 50%, .25);
 }
