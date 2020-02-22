@@ -127,7 +127,7 @@ tbody td {
 
 tbody td.indent {
   width: 28px;
-  border-top: none;
+  border-top: hidden;
 }
 
 table:first-of-type tbody th:first-of-type {
