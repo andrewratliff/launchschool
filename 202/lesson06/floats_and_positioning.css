@@ -1,0 +1,228 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+.cf::before,
+.cf::after {
+  display: block;
+  content: "";
+}
+
+.cf::after {
+  clear: both;
+}
+
+body {
+  background-color: white;
+  color: #545459;
+  font: normal 16px Helvetica, Arial, sans-serif;
+}
+
+.container {
+  border: 2px solid #999;
+  margin: 0 auto;
+  padding: 20px;
+  width: 1000px;
+}
+
+section h1 {
+  font-size: 24px;
+}
+
+section h2 {
+  font-size: 20px;
+}
+section h3 {
+  font-size: 16px;
+}
+
+section h1,
+section h2,
+section h3 {
+  background-color: inherit;
+  color: #ce4a4a;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+section p {
+  line-height: 35px;
+  margin-bottom: 25px;
+}
+
+.border {
+  border: 2px dashed #555;
+  margin: 45px;
+  padding: 30px;
+  width: 650px;
+}
+
+section a {
+  color: #333;
+  text-decoration: none;
+}
+
+section .inline-margin a {
+  margin: 30px;
+}
+
+section .inline-padding a {
+  padding: 30px;
+  background-color: green;
+  color: white;
+}
+
+section .inline-float a {
+  background-color: green;
+  border: 3px solid darkgreen;
+  color: white;
+  float: left;
+  margin: 15px;
+  padding: 25px;
+  text-align: center;
+  width: 120px;
+}
+
+/*** BLOCK ***/
+
+.block .wrapper {
+  margin-bottom: 35px;
+}
+
+.box-1 {
+  background-color: dodgerblue;
+  color: white;
+}
+
+.box-2 {
+  background-color: green;
+  color: white;
+  height: 60px;
+  padding: 20px;
+  margin: 20px;
+}
+
+.box-3 {
+  background-color: tomato;
+  color: white;
+  width: 90px;
+}
+
+.box-4 {
+  background-color: pink;
+  color: white;
+  width: 180px;
+  height: 120px;
+  padding: 20px;
+  margin: 20px;
+}
+
+.fl-1 {
+  background-color: dodgerblue;
+  border: 1px solid red;
+  float: left;
+  color: white;
+}
+
+.fl-2 {
+  background-color: tomato;
+  border: 1px solid red;
+  float: right;
+  color: white;
+}
+
+.fl-3 {
+  background-color: tomato;
+  float: left;
+  color: white;
+  width: 40%;
+  height: 70px;
+  text-align: center;
+  line-height: 70px;
+}
+
+.fl-4 {
+  background-color: dodgerblue;
+  float: right;
+  color: white;
+  width: 50%;
+  height: 70px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 70px;
+}
+
+.block-a {
+  background-color: dodgerblue;
+  box-sizing: border-box;
+  display: block;
+  color: white;
+  text-align: center;
+  margin: 10px;
+  padding: 10px;
+}
+
+.nav {
+  text-align: center;
+}
+
+.inline-block-a {
+  background-color: dodgerblue;
+  border: 1px solid #1b95e0;
+  box-sizing: border-box;
+  display: inline-block;
+  color: white;
+  width: 180px;
+  margin: 20px 8px 25px;
+  padding: 20px 30px;
+}
+
+.inline-block::after {
+  border-bottom: 2px dashed #545459;
+  display: block;
+  content: "";
+  padding-top: 30px;
+}
+
+.pos-fl h1 {
+  margin: 30px 0 25px;
+  text-align: center;
+}
+
+.flbx-1 {
+  background-color: tomato;
+  float: left;
+  color: white;
+  width: 450px;
+  height: 100px;
+  text-align: center;
+  line-height: 100px;
+  font-weight: bold;
+}
+
+.flbx-2 {
+  background-color: dodgerblue;
+  float: left;
+  color: white;
+  width: 505px;
+  height: 100px;
+  text-align: center;
+  line-height: 100px;
+  font-weight: bold;
+}
+
+.flbx-3 {
+  background-color: seagreen;
+  clear: both;
+  color: white;
+  font-weight: bold;
+  height: 50px;
+  line-height: 50px;
+  margin-bottom: 35px;
+  text-align: center;
+  width: 955px;
+}
