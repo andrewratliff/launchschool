@@ -226,3 +226,57 @@ section .inline-float a {
   text-align: center;
   width: 955px;
 }
+
+.pos ul {
+  list-style: disc;
+  margin: 0 0 45px 40px;
+}
+
+.pos li {
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+div.fixed {
+  background-color: dodgerblue;
+  position: fixed;
+  border-radius: 10px;
+  text-align: center;
+  left: 35px;
+  bottom: 50px;
+  color: white;
+  width: 225px;
+  padding: 25px 35px;
+  z-index: 1;
+}
+
+div.relative {
+  position: relative;
+  background-color: tomato;
+  color: white;
+  text-align: center;
+  border-radius: 10px;
+  width: 325px;
+  padding: 25px 35px;
+  right: 90px;
+  bottom: -45px;
+  margin-bottom: 30px;
+}
+
+.pos-abs {
+  z-index: 2;
+  position: relative;
+}
+
+.pos-abs .abs {
+  background-color: green;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  padding: 25px 35px;
+  text-align: center;
+  color: white;
+  top: -30px;
+  width: 200px;
+  left: 230px;
+  position: absolute;
+}

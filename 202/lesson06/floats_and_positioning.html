@@ -271,42 +271,92 @@
       <section class="pos">
         <h1>Positioning</h1>
 
-        We sometimes want to position elements at specific locations on the page. The normal page flow and floats can't do this with the precision we often want. We can use CSS positioning in this case. There are four positioning types:
+        <p>
+          We sometimes want to position elements at specific locations on the
+          page. The normal page flow and floats can't do this with the precision
+          we often want. We can use CSS positioning in this case. There are four
+          positioning types:
+        </p>
 
-        Static
-        Fixed
-        Relative
-        Absolute
+        <ul>
+          <li>Static</li>
+          <li>Fixed</li>
+          <li>Relative</li>
+          <li>Absolute</li>
+        </ul>
 
         <h2>Static Positioning</h2>
 
-        The element renders at its normal position on the page. That is, the browser uses the standard page flow. All elements default tom static positioning.
+        <p>
+          The element renders at its normal position on the page. That is, the
+          browser uses the standard page flow. All elements default tom static
+          positioning.
+        </p>
 
         <h2>Fixed Positioning</h2>
 
-        Lets you place an element at a fixed position in the browser window; it will remain in place even when you scroll the page. You need the top`, `bottom`, `right`, and `left properties to position the element.
+        <p>
+          Lets you place an element at a fixed position in the browser window; it
+          will remain in place even when you scroll the page. You need the
+          <code>top</code>, <code>bottom</code>, <code>right</code>, and
+          <code>left</code> properties to position the element.
+        </p>
 
-        The browser removes elements with fixed positioning from the page flow. It does not leave a gap in the location where the browser would have positioned it otherwise.
+        <p>
+          The browser removes elements with fixed positioning from the page flow.
+          It does not leave a gap in the location where the browser would have
+          positioned it otherwise.
+        </p>
 
-        The blue box on the bottom-left corner of the page is a fixed position element.
+        <p>
+          The blue box on the bottom-left corner of the page is a fixed position
+          element.
+        </p>
 
-        I use fixed positioning.
+        <div class="fixed">
+          I use fixed positioning.
+        </div>
 
-        <h2>Relative Positioning</h2>
+        <div class="pos-relative">
+          <h2>Relative Positioning</h2>
 
-        Relative positioning positions an element at a location relative to its normal position. Unlike fixed positioning, relative positioning does not remove an element from the page flow; in fact, you can observe a gap in the flow indicating the original position.
+          <p>
+            Relative positioning positions an element at a location relative to
+            its normal position. Unlike fixed positioning, relative positioning
+            does not remove an element from the page flow; in fact, you can
+            observe a gap in the flow indicating the original position.
+          </p>
 
-        I use relative positioning.
+          <div class="relative">
+            I use relative positioning.
+          </div>
 
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non cumque repellat sapiente vitae nihil debitis accusamus, odit, tempore id reiciendis consequatur necessitatibus veritatis, distinctio vel, cum repellendus numquam blanditiis perferendis?
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non cumque
+            repellat sapiente vitae nihil debitis accusamus, odit, tempore id
+            reiciendis consequatur necessitatibus veritatis, distinctio vel, cum
+            repellendus numquam blanditiis perferendis?
+          </p>
+        </div>
 
-        <h2>Absolute Positioning</h2>
+        <div class="pos-abs">
+          <h2>Absolute Positioning</h2>
 
-        Absolute positioning removes an element from the normal page flow and positions it at an absolute position relative to its parent element. If the parent element is the `<body>`, the position is absolute relative to the complete page.
+          <p>
+            Absolute positioning removes an element from the normal page flow
+            and positions it at an absolute position relative to its parent
+            element. If the parent element is the <code>&lt;body&gt;</code>, the position is
+            absolute relative to the complete page.
+          </p>
 
-          The green box shows uses absolute positioning.
+          <p>
+            The green box shows uses absolute positioning.
+          </p>
 
-          I use absolute positioning.
+            <div class="abs">
+              I use absolute positioning.
+            </div>
+        </div>
       </section>
     </div>
   </body>
