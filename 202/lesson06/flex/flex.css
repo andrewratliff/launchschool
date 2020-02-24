@@ -1,0 +1,102 @@
+/* default LS CSS */
+
+html {
+  font: normal 24px Helvetica, Arial, sans-serif;
+}
+
+header {
+  padding: 1rem;
+  text-align: center;
+}
+
+nav {
+  background-color: cyan;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  text-align: center;
+  width: 20%;
+}
+
+a {
+  box-sizing: border-box;
+  display: inline-block;
+  padding: 1rem 0;
+  text-decoration: none;
+  width: 100%;
+}
+
+a:focus,
+a:hover {
+  background-color: blue;
+  color: yellow;
+}
+
+article,
+aside {
+  padding: 0 1rem;
+}
+
+aside {
+  background-color: lightgreen;
+}
+
+p {
+  margin: 1rem 0;
+}
+
+footer {
+  background-color: yellow;
+}
+
+#copyright {
+  margin: 0 1rem;
+}
+
+#logo {
+  background-color: orange;
+}
+
+/* Project work */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+header, h1 {
+  background-color: blue;
+  color: white;
+}
+
+ul {
+  display: flex;
+}
+
+main {
+  display: flex;
+}
+
+aside {
+  flex: 1;
+}
+
+article {
+  flex: 2;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row-reverse;
+  align-items: center;
+}
+
+img {
+  height: 200px;
+  display: block;
+}
