@@ -1,0 +1,88 @@
+@import url("whitespace-reset.css");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font: normal 18px "Roboto Condensed", sans-serif;
+  background: linear-gradient(#D2DBBD, #FBFEF4);
+}
+
+header {
+  width: 960px;
+  margin: 0 auto;
+  padding: 20px 20px 0;
+}
+
+h1 {
+  float: left;
+  font-size: 36px;
+  font-weight: normal;
+  background-image: url("logo.png");
+  background-repeat: no-repeat;
+  padding: 45px 0 15px 115px;
+  color: #193441;
+}
+
+nav {
+  float: right;
+  padding-top: 75px;
+}
+
+li {
+  display: inline-block;
+}
+
+a {
+  display: block;
+  text-decoration: none;
+  padding: 10px 40px 14px 40px;
+  color: #91AA9D;
+  background-color: #FCFFF5;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+nav a.selected {
+  background-color: #91AA9D;
+  color: #FCFFF5;
+}
+
+main {
+  clear: both;
+  width: 960px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 30px;
+  color: #3e6170;
+  overflow: hidden;
+  box-shadow: 0 5px 5px #b5b5b5;
+}
+
+main img.masthead {
+  padding-bottom: 40px;
+}
+
+h2 {
+  font-size: 32px;
+  font-weight: normal;
+  padding-bottom: 25px;
+}
+
+main p {
+  padding-bottom: 20px;
+}
+
+main figure {
+  float: right;
+  padding: 0 0 0 30px;
+}
+
+footer {
+  width: 960px;
+  margin: 0 auto;
+  padding: 15px 0 35px 0;
+  color: rgb(62, 96, 111);
+  font-size: 14px;
+}

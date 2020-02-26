@@ -1,0 +1,146 @@
+@import url("whitespace-reset.css");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font: normal 20px Helvetica, Arial, sans-serif;
+  background: #2F2840 url("images/bg_body.gif") 50% 0 repeat;
+  padding-top: 133px;
+  text-align: center;
+}
+
+header > h1 {
+  padding-bottom: 75px;
+}
+
+nav {
+  padding: 38px ;
+  margin-bottom: 3px;
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+}
+
+nav a {
+  padding: 0 38px;
+  color: #cacaca;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 26px;
+}
+
+a.active {
+  color: #6db9ff;
+  font-weight: bold;
+}
+
+main {
+  background-color: white;
+  padding-bottom: 34px;
+}
+
+article {
+  margin: 0 auto;
+  width: 1000px;
+}
+
+#about {
+  padding: 115px 90px 0 90px;
+}
+
+#founder {
+  padding: 0 90px 0 90px;
+}
+
+h2 {
+  font-size: 36px;
+  margin-bottom: 25px;
+}
+
+h2::before, h2::after {
+  content: "\2022";
+  font-size: 30px;
+  padding: 0 27px;
+}
+
+h3 {
+  color: #3e59b2;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+p {
+  margin-bottom: 40px;
+  line-height: 1.5;
+}
+
+footer {
+  background-color: #e7e7e7;
+  padding: 82px 0 75px;
+  color: #b2b2b2;
+}
+
+footer p {
+  margin-bottom: 38px;
+}
+
+footer li {
+  display: inline-block;
+  padding: 0 60px;
+}
+
+footer li a {
+  background: transparent url("images/icons_social-media.png") 0 0 no-repeat;
+  display: block;
+  height: 46px;
+  overflow: hidden;
+  text-indent: -8685px;
+  width: 46px;
+}
+
+footer li a.twitter {
+  background-position: 0 0;
+}
+
+footer li a.facebook {
+  background-position: 0 -46px;
+}
+
+footer li a.email {
+  background-position: 0 -92px;
+}
+
+footer li a.instagram {
+  background-position: 0 -138px;
+}
+
+#project, #team {
+  padding-top: 115px;
+}
+
+#project p, #team p {
+  padding: 0 100px;
+}
+
+#project h3 {
+  padding-top: 50px;
+}
+
+#team ul li {
+  padding: 120px 30px;
+  display: inline-block;
+}
+
+#team ul li a {
+  text-decoration: none;
+  font-size: 24px;
+}
+
+#team a img {
+  display: block;
+}
