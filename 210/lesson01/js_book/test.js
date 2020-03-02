@@ -52,7 +52,22 @@
 // console.log(factorial(5));
 // console.log(factorial(8));
 
-let array = [1, 2, 3];
-array.forEach((num) => {
-  console.log(num);
-});
+// let array = [1, 2, 3];
+// array.forEach((num) => {
+//   console.log(num);
+// });
+
+let words = [
+  'laboratory',
+  'experiment',
+  'flab',
+  'Pans Labyrinth',
+  'elaborate',
+  'polar bear',
+];
+
+let allMatches = (words, regex) => {
+  return words.filter(word => regex.test(word));
+};
+
+console.log(allMatches(words, /lab/)); // ['laboratory', 'flab', 'elaborate']
