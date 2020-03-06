@@ -9,9 +9,7 @@ let rot13 = (string) => {
 };
 
 let rotateChar = (char) => {
-  if (!(/[a-zA-Z]/).test(char)) {
-    return char;
-  }
+  if (!(/[a-zA-Z]/).test(char)) return char;
 
   const CHAR_CODE = char.charCodeAt(0);
   const LOWER_START = 97;
