@@ -2,15 +2,19 @@ let rot13 = (string) => {
   let result = '';
 
   for (let i = 0; i < string.length; i += 1) {
-    result += rotateChar(string[i]);
+    let char = string[i];
+
+    if ((/[a-zA-Z]/).test(char)) {
+      char = rotateChar(char);
+    }
+
+    result += char;
   }
 
   return result;
 };
 
 let rotateChar = (char) => {
-  if (!(/[a-zA-Z]/).test(char)) return char;
-
   const CHAR_CODE = char.charCodeAt(0);
   const LOWER_START = 97;
   const LOWER_END = 122;
