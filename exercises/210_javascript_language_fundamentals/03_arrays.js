@@ -203,11 +203,20 @@ function splice(array, start, deleteCount, element1, elementN) {
   if (start > array.length) start = array.length;
   if (deleteCount > arr.length - start) deleteCount = arr.length - start;
 
-  let result = []
+  let removed = []
+  let elementsToAdd = arguments.slice(3);
 
-  for (let i = start; i < start + deleteCount ; i += 1) {
-    result.push(array[i]);
-  };
+  if (elementsToAdd.length === 0) {
+    for (let i = start; i < array.length ; i += 1) {
+      if (i <= start + deleteCount) {
+        removed.push(array[i]);
+      }
+
+      array[i] = a
+    };
+  }
+
+
 }
 
 console.log(splice([1, 2, 3], 1, 2));              // [2, 3]
