@@ -189,34 +189,28 @@ function slice(arr, begin, end) {
   return result;
 }
 
-console.log(slice([1, 2, 3], 1, 2));               // [2]
-console.log(slice([1, 2, 3], 2, 0));               // []
-console.log(slice([1, 2, 3], 5, 1));               // []
-console.log(slice([1, 2, 3], 0, 5));               // [1, 2, 3]
+// console.log(slice([1, 2, 3], 1, 2));               // [2]
+// console.log(slice([1, 2, 3], 2, 0));               // []
+// console.log(slice([1, 2, 3], 5, 1));               // []
+// console.log(slice([1, 2, 3], 0, 5));               // [1, 2, 3]
 
-var arr = [1, 2, 3];
-console.log(slice(arr, 1, 3));                     // [2, 3]
-console.log(arr);                                  // [1, 2, 3]
+// var arr = [1, 2, 3];
+// console.log(slice(arr, 1, 3));                     // [2, 3]
+// console.log(arr);                                  // [1, 2, 3]
 
 
-function splice(array, start, deleteCount, element1, elementN) {
+function splice(array, start, deleteCount, ...elementsToAdd) {
   if (start > array.length) start = array.length;
-  if (deleteCount > arr.length - start) deleteCount = arr.length - start;
+  if (deleteCount > array.length - start) deleteCount = array.length - start;
 
-  let removed = []
-  let elementsToAdd = arguments.slice(3);
+  let removed = array.slice(start, start + deleteCount);
+  let end = array.slice(start + deleteCount);
 
-  if (elementsToAdd.length === 0) {
-    for (let i = start; i < array.length ; i += 1) {
-      if (i <= start + deleteCount) {
-        removed.push(array[i]);
-      }
+  array.length = start;
 
-      array[i] = a
-    };
-  }
+  elementsToAdd.concat(end).forEach(element => array.push(element) );
 
-
+  return removed;
 }
 
 console.log(splice([1, 2, 3], 1, 2));              // [2, 3]
