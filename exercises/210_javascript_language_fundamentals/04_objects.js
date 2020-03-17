@@ -128,24 +128,24 @@ function penultimate(string) {
 // console.log(penultimate('Launch School is great!'));      // expected: "is"
 
 // 9. after midnight part 1
-var MINUTES_PER_HOUR = 60;
-var HOURS_PER_DAY = 24;
-var MINUTES_PER_DAY = HOURS_PER_DAY * MINUTES_PER_HOUR;
+// var MINUTES_PER_HOUR = 60;
+// var HOURS_PER_DAY = 24;
+// var MINUTES_PER_DAY = HOURS_PER_DAY * MINUTES_PER_HOUR;
 
-function timeOfDay(deltaMinutes) {
-  var hours;
-  var minutes;
+// function timeOfDay(deltaMinutes) {
+//   var hours;
+//   var minutes;
 
-  deltaMinutes = deltaMinutes % MINUTES_PER_DAY;
-  if (deltaMinutes < 0) {
-    deltaMinutes = MINUTES_PER_DAY + deltaMinutes;
-  }
+//   deltaMinutes = deltaMinutes % MINUTES_PER_DAY;
+//   if (deltaMinutes < 0) {
+//     deltaMinutes = MINUTES_PER_DAY + deltaMinutes;
+//   }
 
-  hours = Math.floor(deltaMinutes / MINUTES_PER_HOUR);
-  minutes = deltaMinutes % MINUTES_PER_HOUR;
+//   hours = Math.floor(deltaMinutes / MINUTES_PER_HOUR);
+//   minutes = deltaMinutes % MINUTES_PER_HOUR;
 
-  return padWithZeroes(hours, 2) + ':' + padWithZeroes(minutes, 2);
-}
+//   return padWithZeroes(hours, 2) + ':' + padWithZeroes(minutes, 2);
+// }
 
 function padWithZeroes(number, length) {
   var numberString = String(number);
@@ -158,11 +158,13 @@ function padWithZeroes(number, length) {
 }
 
 function timeOfDay(deltaMinutes) {
-  let MINUTES_PER_HOUR = 60;
-  let HOURS_PER_DAY = 24;
-  let MINUTES_PER_DAY = HOURS_PER_DAY * MINUTES_PER_HOUR;
+  const MILISECONDS_PER_MINUTE = 60000;
 
-  // come back
+  let afterMidnight = new Date(deltaMinutes * MILISECONDS_PER_MINUTE);
+  let hours = padWithZeroes(afterMidnight.getUTCHours(), 2);
+  let minutes = padWithZeroes(afterMidnight.getUTCMinutes(), 2);
+
+  return `${hours}:${minutes}`;
 }
 
 // console.log(timeOfDay(0));          // "00:00"
@@ -172,3 +174,42 @@ function timeOfDay(deltaMinutes) {
 // console.log(timeOfDay(3000));       // "02:00"
 // console.log(timeOfDay(800));        // "13:20"
 // console.log(timeOfDay(-4231));      // "01:29"
+
+// 10 After Midnight Part 2
+const MINUTES_PER_HOUR = 60;
+const HOURS_PER_DAY = 24;
+const MINUTES_PER_DAY = HOURS_PER_DAY * MINUTES_PER_HOUR;
+const MILISECONDS_PER_MINUTE = 60000;
+
+
+// function afterMidnight(timeStr) {
+//   const timeComponents = timeStr.split(':');
+//   const hours = parseInt(timeComponents[0], 10);
+//   const minutes = parseInt(timeComponents[1], 10);
+//   const midnight = new Date(0);
+//   const time = new Date(0);
+
+//   time.setUTCHours(hours);
+//   time.setUTCMinutes(minutes);
+
+//   return (time.getTime() - midnight.getTime()) / MILISECONDS_PER_MINUTE;
+// }
+
+function beforeMidnight(timeStr) {
+  let deltaMinutes = MINUTES_PER_DAY - afterMidnight(timeStr);
+  if (deltaMinutes === MINUTES_PER_DAY) {
+    deltaMinutes = 0;
+  }
+
+  return deltaMinutes;
+}
+
+// from John Isom
+function afterMidnight(timeStr) {
+  return Date.parse(`1970-01-01 ${timeStr} GMT`) / MILISECONDS_PER_MINUTE;
+}
+
+console.log(afterMidnight('00:00'));       // 0
+console.log(beforeMidnight('00:00'));      // 0
+console.log(afterMidnight('12:34'));       // 754
+console.log(beforeMidnight('12:34'));      // 686
