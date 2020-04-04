@@ -28,24 +28,54 @@
 //
 // Algorithm:
 // - clean the string -> replace all separators with a '-' and remove spaces
-// - iterate through each char in the string
-//   -
-// - if it's a number
-//   - check last number in the output array
+// - convert the string to an array
+//   - iterate through each char in the string
+//   - add numbers to a new string
+//   - when it reaches a comma,
+//     - check last number in the output array
 //     - if that last number is less than current number, push current number to
-//     the end of the array
+//     the output array
 //     - else add 10 to the current number until it is greater than the last
 //     number in the output array
 //     - push to the output array
-// - if it's a separator
-//   - iterate from the last number to next number in the list, adding each
-//   number to the array
+//   - if it's a separator
+//     - add separator to the array
+// - expand ranges
+//   - iterate through array
+//     - add the numbers to a new array
+//     - when element is a -, skip
+//     - when the previous element is a dash
+//       - iterate from last number in the array
+//       - add each element
+//   - if the previous element is a -, loop from last element in the array to
+//   the current element, adding each number to the output array
+
+let determineNumber = (lastNumber, significantDigits) => {
+
+};
+
+let convertToArray = cleanedString => {
+  let numberString = '';
+  let result = [];
+
+  cleanedString.split('').forEach(char => {
+    if (char === ',') {
+      result.push(determineNumber(result[result.length - 1], numberString));
+      numberString = '';
+    } else if (char === '-') {
+      result.push(char);
+      numberString = '';
+    } else {
+      numberString += char;
+    }
+  });
+};
 
 let completeNumbers = numStr => {
   let cleaned = numStr.replace(/\s/g, '').replace(/\.\.|:/g, '-');
-  let array = convertToArrat(cleaned);
+  let array = convertToArray(cleaned);
 
-  console.log(cleaned);
+  return expandRanges(array);
 }
 
 
@@ -57,3 +87,4 @@ console.log(completeNumbers('1, 2, 1, 2') === [1, 2, 11, 12]);
 console.log(completeNumbers('1-3, 1-2') === [1, 2, 3, 11, 12]);
 console.log(completeNumbers('1..3, 1-2') === [1, 2, 3, 11, 12]);
 console.log(completeNumbers('1:5:2') === [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+console.log(completeNumbers('104-02'); // --> 104, 105, ... 202
