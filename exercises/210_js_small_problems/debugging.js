@@ -214,12 +214,12 @@ function valenceOfMolecule() {
 
 // Example
 
-console.log('Number of valence electrons');
-console.log('---------------------------');
-console.log('Water:     ' + String(valenceOfMolecule('H2', 'O')));
-console.log('Propane:   ' + String(valenceOfMolecule('C3', 'H8')));
-console.log('Vitamin C: ' + String(valenceOfMolecule('C6', 'H8', 'O6')));
-console.log('Caffeine:  ' + String(valenceOfMolecule('C8', 'H10', 'N4', 'O2')));
+// console.log('Number of valence electrons');
+// console.log('---------------------------');
+// console.log('Water:     ' + String(valenceOfMolecule('H2', 'O')));
+// console.log('Propane:   ' + String(valenceOfMolecule('C3', 'H8')));
+// console.log('Vitamin C: ' + String(valenceOfMolecule('C6', 'H8', 'O6')));
+// console.log('Caffeine:  ' + String(valenceOfMolecule('C8', 'H10', 'N4', 'O2')));
 
 // Expected output:
 // Number of valence electrons
@@ -270,8 +270,12 @@ function targetRoll(characterValue, bonus, penalty) {
   console.log('--> ' + result);
 
   switch (result) {
-    case 1:  automaticFail();
-    case 20: automaticSuccess();
+    case 1:
+      automaticFail();
+      break;
+    case 20:
+      automaticSuccess();
+      break;
     default: result >= characterValue ? success() : fail();
   }
 }
@@ -293,28 +297,148 @@ function automaticFail() {
 }
 
 // Example character.
-var myCharacter = {
-  name: 'Jenkins',
-  strength: 4,
-  constitution: 6,
-  education: 11,
-  luck: 3,
-  sanity: 9,
-};
+// var myCharacter = {
+//   name: 'Jenkins',
+//   strength: 4,
+//   constitution: 6,
+//   education: 11,
+//   luck: 3,
+//   sanity: 9,
+// };
 
 // Example rolls:
 
 // Jenkins wants to break in a door with brute force,
 // so he has to roll against his strength value.
-targetRoll(myCharacter.strength);
+// targetRoll(myCharacter.strength);
 
 // Jenkins is challenged to a drinking contest.
 // In order to determine how much he can take, he rolls against his
 // constitution. Since he just ate a huge portion of pork roast, he
 // gets a D4 bonus die.
-targetRoll(myCharacter.constitution, {min: 0, max: 4});
+// targetRoll(myCharacter.constitution, {min: 0, max: 4});
 
 // Jenkins found an ancient scroll and attempts to decipher it.
 // He has to roll against his education, in order to determine
 // whether he's able to read it.
-targetRoll(myCharacter.education);
+// targetRoll(myCharacter.education);
+
+// 09 Grade Analysis
+function average(nums) {
+  var sum = nums.reduce(function(total, num) {
+    return total + num;
+  });
+
+  return sum / nums.length;
+}
+
+function median(nums) {
+  var median;
+  var length = nums.length;
+
+  nums.sort((a, b) => a - b);
+
+  if (length % 2 === 0) {
+    median = average([nums[(length / 2) - 1], nums[length / 2]]);
+  } else {
+    median = nums[Math.floor(length / 2)];
+  }
+
+  return median;
+}
+
+// Tests
+
+// var quarter1ExamScores = [89, 72, 100, 93, 64, 97, 82, 87, 90, 94];
+// var quarter2ExamScores = [76, 91, 89, 90, 91, 67, 99, 82, 91, 87];
+// var quarter3ExamScores = [99, 91, 88, 72, 76, 64, 94, 79, 86, 88];
+// var quarter4ExamScores = [100, 94, 73, 88, 82, 91, 97, 99, 80, 84];
+
+// // should all log 'true':
+// console.log(average(quarter1ExamScores) === 86.8);
+// console.log(average(quarter2ExamScores) === 86.3);
+// console.log(average(quarter3ExamScores) === 83.7);
+// console.log(average(quarter4ExamScores) === 88.8);
+
+// console.log(median(quarter1ExamScores) === 89.5);
+// console.log(median(quarter2ExamScores) === 89.5);
+// console.log(median(quarter3ExamScores) === 87);
+// console.log(median(quarter4ExamScores) === 89.5);
+
+// 10 Weekday Classes
+var TODAY = toDate("2018-08-05");
+
+function toDate(string) {
+  return new Date(string + "T00:00:00");
+}
+
+function toString(date) {
+  let pad = (string, n) => {
+    while (string.length < n) {
+      string = '0' + string;
+    }
+  };
+
+  const year = String(date.getFullYear());
+  const month = pad(String(date.getMonth() + 1), 2);
+  const day = pad(String(date.getDate()), 2);
+
+  return `${year}-${month}-${day}`;
+}
+
+function isInThePast(date) {
+  return date < TODAY;
+}
+
+function isWeekday(date) {
+  return date.getDay() >= 1 &&
+         date.getDay() <= 5;
+}
+
+var myCalendar = {
+  "2018-08-13": ["JS debugging exercises"],
+  "2018-08-14": ["Read 'Demystifying Rails'", "Settle health insurance"],
+  "2018-08-15": ["Read 'Demystifying Rails'"],
+  "2018-08-16": [],
+  "2018-08-30": ["Drone video project plan"],
+  "2018-09-10": ["Annual servicing of race bike"],
+  "2018-09-12": ["Study"],
+  "2018-11-02": ["Birthday Party"],
+  "2018-11-03": ["Birthday Party"],
+}
+
+var offeredClasses = {
+  "Back To The Future Movie Night": ["2018-07-30"],
+  "Web Security Fundamentals": ["2018-09-10", "2018-09-11"],
+  "Pranayama Yoga For Beginners": ["2018-08-30", "2018-08-31", "2018-09-01"],
+  "Mike's Hikes": ["2018-08-16"],
+  "Gordon Ramsey Master Class": ["2018-09-11", "2018-09-12"],
+  "Powerboating 101": ["2018-09-15", "2018-09-16"],
+  "Discover Parachuting": ["2018-11-02"],
+};
+
+function getCompatibleEvents(classes, calendar) {
+  function isAvailable(date) {
+    var dateStr = toString(date);
+    return !calendar[dateStr] || calendar[dateStr].length === 0;
+  };
+
+  var compatibleClasses = [];
+
+  Object.keys(classes).forEach(function(className) {
+    var classDates = classes[className].map(toDate);
+
+    if (classDates.some(isInThePast)) {
+      return;
+    }
+
+    if (classDates.filter(isWeekday).every(isAvailable)) {
+      compatibleClasses.push(className);
+    }
+  });
+
+  return compatibleClasses;
+}
+
+console.log(getCompatibleEvents(offeredClasses, myCalendar));
+// expected: ["Mike's Hikes", "Powerboating 101"]

@@ -72,26 +72,26 @@ let letterPercentages = str => {
 //   - if the length of the set is 2 return isosceles
 //   - else return scalene
 
-let triangle = (...args) => {
-  let sides = args.sort((a,b) => a - b);
-  let uniqSides = [... new Set(sides)];
+// let triangle = (...args) => {
+//   let sides = args.sort((a,b) => a - b);
+//   let uniqSides = [... new Set(sides)];
 
-  if (invalid(sides)) {
-    return 'invalid';
-  } else if (uniqSides.length === 1) {
-    return 'eqilateral';
-  } else if (uniqSides.length === 2) {
-    return 'isosceles';
-  } else {
-    return 'scalene';
-  }
-};
+//   if (invalid(sides)) {
+//     return 'invalid';
+//   } else if (uniqSides.length === 1) {
+//     return 'eqilateral';
+//   } else if (uniqSides.length === 2) {
+//     return 'isosceles';
+//   } else {
+//     return 'scalene';
+//   }
+// };
 
-const invalid = sides => {
-  return (sides[0] + sides[1]) < sides[2] || sides.some(zero);
-};
+// const invalid = sides => {
+//   return (sides[0] + sides[1]) < sides[2] || sides.some(zero);
+// };
 
-const zero = element => element === 0;
+// const zero = element => element === 0;
 
 // Examples:
 // console.log(triangle(3, 3, 3));        // "equilateral"
@@ -102,9 +102,55 @@ const zero = element => element === 0;
 
 // 03 Tri-Angles
 // Problem:
-// Input:
-// Output:
+// right - one angle exactly 90 degrees
+// acute - all three angles less than 90 degrees
+// obtuse - one angle greater than 90
+//
+// sum of angles must be 180 and every angle must be > 0
+//
+// Input: 3 number array of angles
+// Output: string of triangle type
+//
+// Data Structures:
+// - operate only on input array
+//
+// Algorithm:
+// - invalid triangle?
+//   - sum of angles is greater than 180
+//   - any angles equal zero?
+//   - return 'invalid'
+// - check if one angle is exactly 90 -> return right
+// - check if one angle is > 90 -> return obtuse
+// - check that all angles are less than 90 -> return acute
 
+let triangleType = angles => {
+  if (angles.some(angle => angle === 90)) {
+    return 'right';
+  } else if (angles.some(angle => angle > 90)) {
+    return 'obtuse';
+  } else if (angles.every(angle => angle < 90)) {
+    return 'acute';
+  };
+};
+
+let invalidTriangle = angles => {
+  return angles.reduce((sum, angle) => sum += angle, 0) !== 180 ||
+    angles.some(angle => angle === 0);
+};
+
+let triangle = (...angles) => {
+  if (invalidTriangle(angles)) {
+    return 'invalid'
+  }
+
+  return triangleType(angles);
+};
+
+// console.log(triangle(60, 70, 50));       // "acute"
+// console.log(triangle(30, 90, 60));       // "right"
+// console.log(triangle(120, 50, 10));      // "obtuse"
+// console.log(triangle(0, 90, 90));        // "invalid"
+// console.log(triangle(50, 50, 50));       // "invalid"
 // 04 Unlucky Days
 // Problem:
 // Input: year as a number
@@ -215,3 +261,50 @@ let sumSquareDifference = num => {
 // console.log(sumSquareDifference(100));    // 25164150
 
 // 07 Bubble Sort
+// Problem:
+// Use the bubble sort algorithm to sort an array.
+// Iterate through the array multiple times comparing two adjacent values each
+// time. If a larger value appears before a smaller value, reverse the two
+// elements in place.
+//
+// The algorithm is done when no sorts have been made when iterating.
+//
+// Data Structures:
+// input array will be changed in place
+// use a boolean to keep track if a swap has been made or not
+//
+// Algorithm:
+// - do iteration while swapPerformed is true
+// - iterate from index 0 to index of length - 2
+//   - if current index in array is greater than current + 1
+//     - set swapPerformed = true
+//     - swap the values
+
+let bubbleSort = arr => {
+  let swapPerformed;
+
+  do {
+    swapPerformed = false;
+
+    for (let i = 0; i < arr.length - 1; i += 1) {
+      if (arr[i] > arr[i + 1]) {
+        swapPerformed = true;
+        let temp = arr[i];
+        arr[i] = arr[i + 1];
+        arr[i + 1] = temp;
+      }
+    }
+  } while (swapPerformed);
+};
+
+ var array = [5, 3];
+bubbleSort(array);
+console.log(array);    // [3, 5]
+
+var array = [6, 2, 7, 1, 4];
+bubbleSort(array);
+console.log(array);    // [1, 2, 4, 6, 7]
+
+var array = ['Sue', 'Pete', 'Alice', 'Tyler', 'Rachel', 'Kim', 'Bonnie'];
+bubbleSort(array);
+console.log(array);    // ["Alice", "Bonnie", "Kim", "Pete", "Rachel", "Sue", "Tyler"]
