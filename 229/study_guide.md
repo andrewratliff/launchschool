@@ -1,20 +1,24 @@
-How can we override the say function using an arrow function.
+# JS229 Study Guide
 
-```javascript
-var dog = {
-  say() {
-    console.log(this.name + ' says Woof!');
-  }
-};
+How do ES6 features factor in with these concepts? (let/const and arrow
+functions)
 
-var fido = Object.create(dog);
-fido.name = 'Fido';
-fido.say = function() {
-  console.log(this.name + ' says Woof Woof!');
-};
+You should be able to explain clearly and apply the following concepts:
 
-fido.say();
-var spot = Object.create(dog);
-spot.name = 'Spot';
-spot.say();
-```
+- Objects
+  - Organizing code into appropriate objects
+  - Object factories
+- Determining/setting function execution context (this)
+  - Implicit function execution context
+  - Explicit function execution context
+  - Dealing with context loss
+- Scope and Closures
+  - Creating and using private data
+  - Garbage collection
+  - IIFEs
+  - Partial Function Application
+- Object creation patterns
+  - Constructor functions
+  - Prototype objects
+  - Behavior delegation
+  - OLOO and Pseudo-Classical patterns
