@@ -1,155 +1,168 @@
-// 01 What is This
-// Read the following code carefully. What do you think is logged on line 7. Try
-// to answer the question before you run the code.
+// 1 What is This
+// var person = {
+//   firstName: 'Rick',
+//   lastName: 'Sanchez',
+//   fullName: this.firstName + this.lastName,
+// };
 
-var person = {
-  firstName: 'Rick ',
-  lastName: 'Sanchez',
-  fullName: this.firstName + this.lastName,
-};
+// console.log(person.fullName); // undefined + undefined => NaN
 
-// console.log(person.fullName); // NaN
+// 2 The Franchise
+// using optional thisArg
+// var franchise = {
+//   name: 'How to Train Your Dragon',
+//   allMovies: function() {
+//     return [1, 2, 3].map(function(number) {
+//       return this.name + ' ' + number;
+//     }, this);
+//   },
+// };
 
-// Anywhere outside a function, `this` is bound to the global object.
+// using bind
+// var franchise = {
+//   name: 'How to Train Your Dragon',
+//   allMovies: function() {
+//     return [1, 2, 3].map(function(number) {
+//       return this.name + ' ' + number;
+//     }.bind(this));
+//   },
+// };
 
-// 02 The Franchise
-var franchise = {
-  name: 'How to Train Your Dragon',
-  allMovies: function() {
-    let self = this;
-    return [1, 2, 3].map(function(number) {
-      return self.name + ' ' + number;
-    });
-  },
-};
+// using local variable
+// var franchise = {
+//   name: 'How to Train Your Dragon',
+//   allMovies: function() {
+//     let self = this;
+//     return [1, 2, 3].map(function(number) {
+//       return self.name + ' ' + number;
+//     });
+//   },
+// };
 
-// 03 The Franchise - Solution 2
-var franchise = {
-  name: 'How to Train Your Dragon',
-  allMovies: function() {
-    return [1, 2, 3].map(function(number) {
-      return this.name + ' ' + number;
-    }.bind(this));
-  },
-};
+// using es6 arrow function syntax
+// var franchise = {
+//   name: 'How to Train Your Dragon',
+//   allMovies: function() {
+//     return [1, 2, 3].map(number => {
+//       return this.name + ' ' + number;
+//     });
+//   },
+// };
 
-// the map function can also take a second argument, thisArg
-var franchise = {
-  name: 'How to Train Your Dragon',
-  allMovies: function() {
-    return [1, 2, 3].map(function(number) {
-      return this.name + ' ' + number;
-    }, this);
-  }
-};
+// 3 The Franchise - Solution 2
+// see above
 
-// 04 Out very own bind()
-function myBind(func, context) {
-  return function(...args) {
-    return func.apply(context, args);
-  };
-}
+// 4 Our very own bind()
+// function myBind(func, context, ...partialArgs) {
+//   return function(...remainingArgs) {
+//     return func.apply(context, [...partialArgs, ...remainingArgs]);
+//   };
+// }
 
-// 05 myBind() improved
-function myBind(func, context, ...args) {
-  return function(...otherArgs) {
-    return func.apply(context, [...args, ...otherArgs]);
-  };
-}
+// const a = {
+//   a: 1,
+//   b: 2,
+//   c() {
+//     return this.a;
+//   },
+// };
 
-function addNumbers(a, b) {
-  return a + b;
-}
+// const b = {
+//   a: 5,
+//   b: 6,
+// };
 
-let add10 = myBind(addNumbers, null, 10);
+// const boundC = myBind(a.c, b);
 
-// console.log(add10(15));
+// 5 myBind() Improved
+// function addNumbers(a, b) {
+//   return a + b;
+// }
 
-// 06 myFilter()
-function myFilter(array, func, thisArg) {
-  var result = [];
+// var addFive = myBind(addNumbers, null, 5);
 
-  array.forEach(function(value) {
-    if (func.call(thisArg, value)) {
-      result.push(value);
-    }
-  });
+// 6 myFilter()
+// function myFilter(array, func, thisArg) {
+//   var result = [];
 
-  return result;
-}
+//   array.forEach(function(value) {
+//     if (func.call(thisArg, value)) {
+//       result.push(value);
+//     }
+//   });
 
-var filter = {
-  allowedValues: [5, 6, 9],
-}
+//   return result;
+// }
 
-myFilter([2, 1, 3, 4, 5, 6, 9, 12], function(val) {
-  return this.allowedValues.indexOf(val) >= 0;
-}, filter); // returns [5, 6, 9]
+// var filter = {
+//   allowedValues: [5, 6, 9],
+// }
 
+// myFilter([2, 1, 3, 4, 5, 6, 9, 12], function(val) {
+//   return this.allowedValues.indexOf(val) >= 0;
+// }, filter); // returns [5, 6, 9]
 
-// 07 Garbage Collection
-function makeCounter() {
-  var count = 1;
+// 7 Garbage Collection
+// function makeCounter() {
+//   var count = 1;
 
-  return function() {
-    console.log(count++)
-  };
-}
+//   return function() {
+//     console.log(count++)
+//   };
+// }
 
 // var counter = makeCounter();
 // counter();
+// JS will not GC the count variable's value since counter still points at the function
+// returned by makeCounter which has a closure over the count variable.
 
-// Will the JavaScript garbage collection mechanism GC the variable `count`
-// after the function `counter` is run on line 10?
-// No, since counter is still in scope and references count in its closure,
-// count cannot be GC'd.
+// 8 Make a Stack
+// function newStack() {
+//   const stack = [];
 
-// 08 Make a Stack
-function newStack() {
-  let stack = [];
-
-  return {
-    push(value) {
-      stack.push(value);
-    },
-    pop() {
-      return stack.pop();
-    },
-    printStack() {
-      stack.forEach(value => console.log(value));
-    },
-  };
-}
-
-// 09 Don't Pollute My Window
-// var greeter = function(name, greeting) {
 //   return {
-//     message: greeting + ' ' + name + '!',
-//     sayGreetings: function() {
-//       console.log(this.message);
+//     push(value) {
+//       stack.push(value);
 //     },
-//   }
+//     pop() {
+//       return stack.pop();
+//     },
+//     printStack() {
+//       stack.forEach(item => console.log(item));
+//     },
+//   };
+// }
+
+// 9 Don't Pollute My Window
+// var greeter = (function() {
+//   var name = 'Naveed';
+//   var greeting = 'Hello';
+//   var message =  greeting + ' ' + name + '!';
+
+//   return {
+//     sayGreetings: function() {
+//       console.log(message);
+//     }
+//   };
+// })();
+
+// LS Solution:
+// var greeter = {
+//   message: (function() {
+//     var name = 'Naveed';
+//     var greeting = 'Hello';
+//     return greeting + ' ' + name + '!';
+//   })(),
+
+//   sayGreetings() {
+//     console.log(this.message);
+//   },
 // };
 
-var greeter = {
-  message: (function() {
-    var name = 'Naveed';
-    var greeting = 'Hello';
-
-    return greeting + ' ' + name + '!';
-  })(),
-
-  sayGreetings: function() {
-    console.log(this.message);
-  }
-};
-
-// greeter.sayGreetings();
-
 // 10 School Improved
-var school = (function () {
+var school = (function() {
   const students = [];
-  const allowedValues = ['1st', '2nd', '3rd', '4th', '5th'];
+  const VALID_YEARS = ['1st', '2nd', '3rd', '4th', '5th'];
   function getCourse(student, courseName) {
     return student.listCourses().filter(function(course) {
       return course.name === courseName;
@@ -158,7 +171,7 @@ var school = (function () {
 
   return {
     addStudent: function(name, year) {
-      if (allowedValues.indexOf(year) >= 0) {
+      if (VALID_YEARS.indexOf(year) >= 0) {
         var student = createStudent(name, year);
         students.push(student);
         return student;
@@ -172,9 +185,7 @@ var school = (function () {
     },
 
     addGrade: function(student, courseName, grade) {
-      var course = student.listCourses().filter(function(course) {
-        return course.name === courseName;
-      })[0];
+      var course = getCourse(student, courseName);
 
       if (course) {
         course.grade = grade;
@@ -211,5 +222,5 @@ var school = (function () {
         console.log('Course Average: ' + String(average));
       }
     },
-  };
+  }
 })();
