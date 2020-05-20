@@ -468,3 +468,281 @@
 //     }, this);
 //   }
 // };
+
+// var temperatues = [53, 86, 12, 43];
+
+// function average() {
+//   var total = 0;
+
+//   for (let i = this.length - 1; i >= 0; i -= 1) {
+//     total += this[i];
+//   };
+
+//   return total / this.length;
+// }
+
+// when a method is removed from it's containing object it loses it's context
+// function repeatThreeTimes(func) {
+//   func();
+//   func();
+//   func();
+// }
+
+// function foo() {
+//   var john = {
+//     firstName: 'John',
+//     lastName: 'Doe',
+//     greetings: function() {
+//       console.log('hello, ' + this.firstName + ' ' + this.lastName);
+//     },
+//   };
+
+//   repeatThreeTimes(john.greetings);
+// }
+
+// update recieving function to take a context
+// function repeatThreeTimes(func, context) {
+//   func.call(context);
+//   func.call(context);
+//   func.call(context);
+// }
+
+// function foo() {
+//   var john = {
+//     firstName: 'John',
+//     lastName: 'Doe',
+//     greetings: function() {
+//       console.log('hello, ' + this.firstName + ' ' + this.lastName);
+//     },
+//   };
+
+//   repeatThreeTimes(john.greetings, john);
+// }
+
+// hard bind the function's context
+// function repeatThreeTimes(func) {
+//   func();
+//   func();
+//   func();
+// }
+
+// function foo() {
+//   var john = {
+//     firstName: 'John',
+//     lastName: 'Doe',
+//     greetings: function() {
+//       console.log(`Hello, ${this.firstName} ${this.lastName}`);
+//     }
+//   };
+
+//   repeatThreeTimes(john.greetings.bind(john));
+// }
+
+// Internal function losing method context
+var obj = {
+  a: 'hello',
+  b: 'world',
+  foo() {
+    function bar() {
+      console.log(`${this.a} ${this.b}`);
+    }
+
+    bar();
+  },
+};
+// bar() does not provide an explicit context so the execution context is the
+// global object
+
+// // perserve scope using a local variable in the lexical scope
+// var obj1 = {
+//   a: 'hello',
+//   b: 'world',
+//   foo() {
+//     let that = this;
+//     function bar() {
+//       console.log(`${that.a} ${that.b}`);
+//     }
+
+//     bar();
+//   },
+// };
+
+// // pass the context to internal functions
+// var obj2 = {
+//   a: 'hello',
+//   b: 'world',
+//   foo() {
+//     function bar() {
+//       console.log(`${this.a} ${this.b}`);
+//     }
+
+//     bar.call(this);
+//   },
+// };
+
+// // bind the context with a function expression
+// var obj3 = {
+//   a: 'hello',
+//   b: 'world',
+//   foo() {
+//     var bar = function() {
+//       console.log(`${this.a} ${this.b}`);
+//     }.bind(this)
+
+//     bar();
+//   },
+// };
+
+// Function as argument losing surrounding context
+// function repeatThreeTimes(func) {
+//   func();
+//   func();
+//   func();
+// }
+
+// var john = {
+//   firstName: 'John',
+//   lastName: 'Doe',
+//   greetings: function() {
+//     repeatThreeTimes(function() {
+//       console.log('hello, ' + this.firstName + ' ' + this.lastName);
+//     });
+//   },
+// };
+
+// john.greetings();
+
+// // use a local variable in the lexical scope to store this
+// var obj = {
+//   a: 'hello',
+//   b: 'world',
+//   foo: function() {
+//     let that = this;
+//     [1, 2, 3].forEach(function(number) {
+//       console.log(`${number} ${that.a} ${that.b}`);
+//     });
+//   }
+// };
+
+// obj.foo();
+
+// // bind the argument function with the surrounding context
+// var obj = {
+//   a: 'hello',
+//   b: 'world',
+//   foo: function() {
+//     [1, 2, 3].forEach(function(number) {
+//       console.log(`${number} ${this.a} ${this.b}`);
+//     }.bind(this));
+//   }
+// };
+
+// obj.foo();
+
+// // use optional thisArg argument
+// var obj = {
+//   a: 'hello',
+//   b: 'world',
+//   foo: function() {
+//     [1, 2, 3].forEach(function(number) {
+//       console.log(`${number} ${this.a} ${this.b}`);
+//     }, this);
+//   }
+// };
+
+// obj.foo();
+
+// var turk = {
+//   firstName: 'Christopher',
+//   lastName: 'Turk',
+//   occupation: 'Surgeon',
+//   getDescription: function() {
+//     return this.firstName + ' ' + this.lastName + ' is a ' + this.occupation + '.';
+//   }
+// };
+
+// function logReturnVal(func, context) {
+//   var returnVal = func.apply(context);
+//   console.log(returnVal);
+// }
+
+// logReturnVal(turk.getDescription, turk);
+// var getTurkDescription = turk.getDescription.bind(turk);
+
+// var TESgames = {
+//   titles: ['Arena', 'Daggerfall', 'Morrowind', 'Oblivion', 'Skyrim'],
+//   seriesTitle: 'The Elder Scrolls',
+//   listGames: function() {
+//     var self = this;
+//     this.titles.forEach(function(title) {
+//       console.log(self.seriesTitle + ' ' + title);
+//     });
+//   }
+// };
+
+// var TESgames = {
+//   titles: ['Arena', 'Daggerfall', 'Morrowind', 'Oblivion', 'Skyrim'],
+//   seriesTitle: 'The Elder Scrolls',
+//   listGames: function() {
+//     this.titles.forEach(function(title) {
+//       console.log(this.seriesTitle + ' ' + title);
+//     }.bind(this));
+//   }
+// };
+
+// var TESgames = {
+//   titles: ['Arena', 'Daggerfall', 'Morrowind', 'Oblivion', 'Skyrim'],
+//   seriesTitle: 'The Elder Scrolls',
+//   listGames: function() {
+//     this.titles.forEach(function(title) {
+//       console.log(this.seriesTitle + ' ' + title);
+//     }, this);
+//   }
+// };
+
+// TESgames.listGames();
+
+// var foo = {
+//   a: 0,
+//   incrementA: function() {
+//     var increment = function() {
+//       this.a += 1;
+//     }.bind(this);
+
+//     increment();
+//     increment();
+//     increment();
+//   }
+// };
+
+// foo.incrementA();
+
+// var myObject = {
+//   count: 1,
+//   myChildObject: {
+//     myMethod: function() {
+//       return this.count;
+//     },
+//   },
+// };
+
+// console.log(myObject.myChildObject.myMethod.call(myObject));
+
+var computer = {
+  price: 30000,
+  shipping: 2000,
+  total: function() {
+    var tax = 3000;
+    function specialDiscount() {
+      if (this.price > 20000) {
+        return 1000;
+      } else {
+        return 0;
+      }
+    }
+
+    return this.price + this.shipping + tax - specialDiscount.call(this);
+  }
+};
+
+console.log(computer.total());
