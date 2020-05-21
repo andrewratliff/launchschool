@@ -728,21 +728,435 @@ var obj = {
 
 // console.log(myObject.myChildObject.myMethod.call(myObject));
 
-var computer = {
-  price: 30000,
-  shipping: 2000,
-  total: function() {
-    var tax = 3000;
-    function specialDiscount() {
-      if (this.price > 20000) {
-        return 1000;
-      } else {
-        return 0;
-      }
-    }
+// var computer = {
+//   price: 30000,
+//   shipping: 2000,
+//   total: function() {
+//     var tax = 3000;
+//     function specialDiscount() {
+//       if (this.price > 20000) {
+//         return 1000;
+//       } else {
+//         return 0;
+//       }
+//     }
 
-    return this.price + this.shipping + tax - specialDiscount.call(this);
-  }
-};
+//     return this.price + this.shipping + tax - specialDiscount.call(this);
+//   }
+// };
 
-console.log(computer.total());
+// console.log(computer.total());
+
+// function timed(func) {
+//   return function() {
+//     var start = new Date();
+//     func();
+//     var stop = new Date();
+//     console.log(`${(stop - start).toString()} ms have elapsed.`);
+//   };
+// }
+
+// function loopy() {
+//   let sum = 0;
+
+//   for (let i = 1; i < 1000000000; i += 1) {
+//     sum += i;
+//   };
+
+//   console.log(sum);
+// }
+
+// var numbers = [1, 2, 3, 4];
+
+// function makeCheckEven() {
+//   return function(num) {
+//     return num % 2 === 0;
+//   }
+// }
+
+// var checkEven = makeCheckEven();
+// console.log(numbers.filter(checkEven));
+
+// function execute(func, operand) {
+//   return func(operand);
+// }
+
+// execute(function(number) {
+//   return number * 2;
+// }, 10);
+
+// execute(function(string) {
+//   return string.toUpperCase();
+// }, 'hey there buddy');
+
+// function makeListTransformer(func) {
+//   return function(list) {
+//     return list.map(func);
+//   };
+// }
+
+// var timesTwo = makeListTransformer(function(number) {
+//   return number * 2;
+// });
+
+// timesTwo([1, 2, 3, 4]);
+
+// function makeCounter() {
+//   var count = 0;
+//   return function() {
+//     count += 1;
+//     console.log(count);
+//   };
+// }
+
+// function makeCounterLogger(start) {
+//   return function(stop) {
+//     if (start < stop) {
+//       for (let i = start; i <= stop; i += 1) {
+//         console.log(i);
+//       };
+//     } else {
+//       for (let i = start; i >= stop; i -= 1) {
+//         console.log(i);
+//       };
+//     }
+//   };
+// }
+
+// var countlog = makeCounterLogger(5);
+
+// function makeList() {
+//   const list = [];
+
+//   return function(item) {
+//     if (item && !list.includes(item)) {
+//       list.push(item);
+//       console.log(`${item} added!`);
+//     } else if (item && list.includes(item)) {
+//       list.splice(list.indexOf(item), 1);
+//       console.log(`${item} was removed!`);
+//     } else {
+//       if (list.length === 0) {
+//         console.log('The list is empty.');
+//       } else {
+//         list.forEach(item => console.log(item));
+//       }
+//     }
+//   };
+// }
+
+// const list = makeList();
+
+// function makeMultipleLister(num) {
+//   return function() {
+//     for (let i = num; i < 100; i += num) {
+//       console.log(i);
+//     };
+//   };
+// }
+
+// var lister = makeMultipleLister(13);
+
+// let total = 0;
+
+// function add(num) {
+//   return total += num;
+// }
+
+// function subtract(num) {
+//   return total -= num;
+// }
+
+// function later(func, arg) {
+//   return function() {
+//     func(arg);
+//   };
+// }
+
+// var logWarning = later(console.log, 'The system is shutting down!');
+
+// function startup() {
+//   var status = 'ready';
+//   return function() {
+//     console.log('The system is ready.');
+//   };
+// }
+
+// var ready = startup();
+
+// function makeList() {
+//   var items = [];
+
+//   return {
+//     add(item) {
+//       if (item) {
+//         if (items.includes(item)) {
+//           console.log(`${item} is already on the list!`);
+//         } else {
+//           items.push(item);
+//           console.log(`${item} added!`);
+//         }
+//       } else {
+//         console.log('Please specify an item to add.');
+//       }
+//     },
+//     remove(item) {
+//       if (item) {
+//         if (items.includes(item)) {
+//           items.splice(items.indexOf(item), 1);
+//           console.log(`${item} removed!`);
+//         } else {
+//           console.log(`${item} is not on the list!`);
+//         }
+//       } else {
+//         console.log('Please specify an item to remove.');
+//       }
+
+//     },
+//     list() {
+//       if (items.length === 0) {
+//         console.log('The list is empty.');
+//       } else {
+//         items.forEach(item => console.log(item))
+//       }
+//     },
+//   };
+// }
+
+// const list = makeList();
+
+// function makeAccount(number) {
+//   let balance = 0;
+//   const transactions = [];
+
+//   return {
+//     balance() {
+//       return balance;
+//     },
+//     transactions() {
+//       return transactions;
+//     },
+//     number() {
+//       return number;
+//     },
+//     deposit(amount) {
+//       this.balance += amount;
+//       this.addTransaction('deposit', amount);
+//       return amount;
+//     },
+//     withdraw(amount) {
+//       if (amount > this.balance) {
+//         amount = this.balance;
+//       }
+
+//       this.balance -= amount;
+//       this.addTransaction('withdraw', amount);
+//       return amount;
+//     },
+//     addTransaction(type, amount) {
+//       transactions.push({type: type, amount: amount});
+//     }
+//   }
+// };
+
+// function makeBank() {
+//   let nextNumber = 101;
+//   const accounts = [];
+
+//   return {
+//     getNextNumber() {
+//       const number = nextNumber;
+//       nextNumber += 1;
+//       return number;
+//     },
+//     openAccount() {
+//       const newAccount = makeAccount(this.getNextNumber());
+//       accounts.push(newAccount);
+//       return newAccount;
+//     },
+//     transfer(source, destination, amount) {
+//       return destination.deposit(source.withdraw(amount));
+//     }
+//   };
+// }
+
+// var bank = makeBank();
+// var account = bank.openAccount();
+
+// function primaryFunc(arg1, arg2) {
+//   console.log(arg1);
+//   console.log(arg2);
+// }
+
+// function generatorFunc(primary, arg1) {
+//   return function(arg2) {
+//     return primary(arg1, arg2);
+//   };
+// }
+
+// var applicatorFunc = generatorFunc(primaryFunc, 100);
+
+// function add(a, b) {
+//   return a + b;
+// }
+
+// function makeAddN(addend) {
+//   return function(number) {
+//     return add(addend, number);
+//   };
+// }
+
+// var add1 = makeAddN(1);
+// var add9 = makeAddN(9);
+
+// function partial(primary, arg1) {
+//   return function(arg2) {
+//     return primary(arg1, arg2);
+//   };
+// }
+
+// var add10 = partial(add, 10);
+
+// var add20 = add.bind(null, 20);
+
+// function partial(func, arg1) {
+//   return function(arg2) {
+//     return func(arg1, arg2);
+//   };
+// }
+
+// function greet(greeting, name) {
+//   console.log(`${greeting}, ${name}!`);
+// }
+
+// let sayHello = partial(greet, 'Hello');
+// let sayHi = partial(greet, 'Hi');
+
+// function subtract(a, b) {
+//   return a - b;
+// }
+
+// function sub5(num) {
+//   return subtract(num, 5);
+// }
+
+// function makeSubN(n) {
+//   return function(num) {
+//     return subtract(num, n);
+//   };
+// }
+
+// function partial(func, arg1) {
+//   return function(arg2) {
+//     return func(arg1, arg2);
+//   };
+// }
+
+// function multiply(a, b) {
+//   return a * b;
+// }
+
+// var multiplyBy5 = partial(multiply, 5);
+
+// var subjects = {
+//   English: ['Bob', 'Tyrone', 'Lizzy'],
+//   Math: ['Fatima', 'Gary', 'Susan'],
+//   Biology: ['Jack', 'Sarah', 'Tanya'],
+// };
+
+// function rollCall(subject, students) {
+//   console.log(subject + ':');
+//   students.forEach(function(student) {
+//     console.log(student);
+//   });
+// }
+
+// function makeMathRollCall() {
+//   return function(students) {
+//     return rollCall('Math', students);
+//   };
+// }
+
+// var mathRollCall = makeMathRollCall();
+// mathRollCall(subjects['Math']);
+
+// (function() {
+//   console.log('hello');
+// })();
+
+// (function(a) {
+//   console.log(a + 10);
+// })(2);
+
+// var foo = function() {
+//   return function() {
+//     return 10;
+//   }();
+// }();
+
+// (function(num) {
+//   for (let i = 0; i < num; i += 1) {
+//     console.log(i);
+//   };
+// })(20);
+
+// let nextStudentId = (function() {
+//   let id = 1;
+
+//   return function() {
+//     return id += 1;
+//   };
+// })();
+
+// var inventory = {
+//   stocks: [],
+//   stockCounts: function() {
+//     this.stocks.forEach(function(stock) {
+//       console.log(stock.name + ': ' + String(stock.count));
+//     });
+//   }
+// };
+
+// var inventory = (function() {
+//   var stocks = [];
+//   var isValid = stocks.every(function(stock) {
+//     return newStock.name !== stock.name;
+//   });
+
+//   return {
+//     stockCounts: function() {
+//       stocks.forEach(function(stock) {
+//         console.log(stock.name + ': ' + String(stock.count));
+//       });
+//     },
+//     addStock: function(newStock) {
+//       if (isValid) { stocks.push(newStock) }
+//     }
+//   };
+// })();
+
+// var sum = 0;
+// var numbers;
+
+// sum += 10;
+// sum += 31;
+
+// numbers = [1, 7, -3, 3];
+
+// sum += (function sum(arr) {
+//   return arr.reduce(function(sum, number) {
+//     sum += number;
+//     return sum;
+//   }, 0);
+// })(numbers);
+
+// function countdown(start) {
+//   (function logIt(num) {
+//     if (num >= 0) {
+//       console.log(num);
+//       logIt(num - 1);
+//     } else {
+//       console.log('Done!');
+//     };
+//   })(start);
+// }
