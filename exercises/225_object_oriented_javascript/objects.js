@@ -1,179 +1,198 @@
-// 02 Buggy Code
-var item = {
-  name: 'Foo',
-  description: 'Fusce consequat dui est, semper.',
-  price: 50,
-  quantity: 100,
-  discount: function(percent) {
-    return this.price - (this.price * percent / 100);
-  },
-};
+// Buggy Code 2
+// var item = {
+//   name: 'Foo',
+//   description: 'Fusce consequat dui est, semper.',
+//   price: 50,
+//   quantity: 100,
+//   discount: function(percent) {
+//     var discount = this.price * percent / 100;
 
-// 03
-function objectsEqual(obj1, obj2) {
-  if (typeof obj1 !== typeof obj2 ||
-      Object.keys(obj1).length !== Object.keys(obj2).length) {
-    return false;
-  }
+//     return this.price - discount;
+//   },
+// };
 
-  const obj1Keys = Object.keys(obj1);
-  const obj2Keys = Object.keys(obj2);
+// function objectsEqual(obj1, obj2) {
+//   const keys1 = Object.keys(obj1);
+//   const keys2 = Object.keys(obj2);
 
-  for (let i = 0; i < obj1Keys.length ; i += 1) {
-    key1 = obj1Keys[i];
-    key2 = obj2Keys[i];
+//   if (keys1.length !== keys2.length) {
+//     return false;
+//   }
 
-    if (obj1[key1] !== obj2[key1] || obj1[key2] !== obj2[key2]) {
-      return false
-    }
-  };
+//   for (let i = 0; i < keys1.length; i += 1) {
+//     if (obj1[keys1[i]] !== obj2[keys1[i]]) {
+//       return false;
+//     } else if (obj1[keys2[i]] !== obj2[keys2[i]]) {
+//       return false;
+//     }
+//   };
 
-  return true;
-}
+//   return true;
+// }
+
+// function objectsEqual(a, b) {
+//   if (a === b) {
+//     return true;
+//   }
+
+//   return (keysMatch(a, b) && valuesMatch(a, b));
+// }
+
+// function keysMatch(obj1, obj2) {
+//   let keys1 = Object.keys(obj1).sort();
+//   let keys2 = Object.keys(obj2).sort();
+
+//   if (keys1.length !== keys2.length) {
+//     return false;
+//   }
+
+//   return keys1.every((key, index) => key === keys2[index]);
+// }
+
+// function valuesMatch(obj1, obj2) {
+//   let keys1 = Object.keys(obj1).sort();
+
+//   return keys1.every(key => obj1[key] === obj2[key]);
+// }
 
 // console.log(objectsEqual({a: 'foo'}, {a: 'foo'}));                      // true
 // console.log(objectsEqual({a: 'foo', b: 'bar'}, {a: 'foo'}));            // false
 // console.log(objectsEqual({}, {}));                                      // true
 // console.log(objectsEqual({a: 'foo', b: undefined}, {a: 'foo', c: 1}));  // false
 
-// 03 Student
-function createStudent(name, year) {
-  return {
-    name: name,
-    year: year,
-    courses: [],
-    info() {
-      console.log(`${this.name} is a ${this.year} year student.`);
-    },
-    addCourse(course) {
-      this.courses.push(course);
-    },
-    listCourses() {
-      console.log(this.courses)
-    },
-    addNote(code, note) {
-      const course = this.courses.filter(course => course.code === code)[0];
+// let z = { a: 'foo' };
+// let x = { a: 'foo' };
 
-      if (course) {
-        if (course.hasOwnProperty('note')) {
-          course.note += `; ${note}`;
-        } else {
+function createSchool() {
+  const VALID_YEARS = ['1st', '2nd', '3rd', '4th', '5th'];
+  const students = [];
+
+  function createStudent(name, grade) {
+    const courses = [];
+
+    function findCourse(number) {
+      return courses.filter(course => course.code === number)[0];
+    }
+
+    return {
+      courses: courses,
+      name: name,
+      info() {
+        console.log(`${name} is a ${grade} year student.`);
+      },
+      addCourse(course) {
+        courses.push(course);
+      },
+      listCourses() {
+        console.log(courses);
+      },
+      addNote(number, note) {
+        const course = findCourse(number);
+
+        if (course && course.note) {
+          course.note += '; ' + note;
+        } else if (course) {
+          this.updateNote(number, note);
+        }
+      },
+      updateNote(number, note) {
+        const course = findCourse(number);
+
+        if (course) {
           course.note = note;
         }
-      }
-    },
-    updateNote(code, note) {
-      const course = this.courses.filter(course => course.code === code)[0];
+      },
+      viewNotes() {
+        courses.forEach(course => {
+          if (course.note) {
+            console.log(`${course.name}: ${course.note}`);
+          }
+        });
+      },
+      addGrade(courseNumber, grade) {
+        const course = findCourse(courseNumber);
 
-      course.note = note;
+        if (course) {
+          course.grade = grade;
+        }
+      },
+      enrolledInCourse(courseName) {
+        return courses.map(course => course.name).includes(courseName);
+      },
+      hasGradeForCourse(courseName) {
+        const course = courses.find(course => course.name === courseName);
+
+        return course.grade;
+      },
+    };
+  }
+
+  function getStudentsForCourse(courseName) {
+    return students.filter(student => {
+      return student.enrolledInCourse(courseName) && student.hasGradeForCourse(courseName);
+    });
+  }
+
+  return {
+    addStudent(name, year) {
+      if (!VALID_YEARS.includes(year)) {
+        console.log('Invalid year');
+        return;
+      }
+
+      const student = createStudent(name, year);
+      students.push(student);
+      return student;
     },
-    viewNotes() {
-      this.courses.forEach(course => {
-        if (course.note) {
-          console.log(`${course.name}: ${course.note}`);
+    enrollStudent(student, course) {
+      student.addCourse(course);
+    },
+    addGrade(student, courseNumber, grade) {
+      student.addGrade(courseNumber, grade);
+    },
+    getReportCard(student) {
+      student.courses().forEach(course => {
+        if (course.grade) {
+          console.log(`${course.name}: ${course.grade}`);
+        } else {
+          console.log(`${course.name}: In progress`);
         }
       });
     },
-  }
+    courseReport(courseName) {
+      const courseStudents = getStudentsForCourse(courseName);
+      const grades = [];
+
+      if (courseStudents.length > 0) {
+        console.log(`=${courseName} Grades=`);
+        courseStudents.forEach(student => {
+          const grade = student.courses.filter(course => course.name === courseName)[0].grade;
+          grades.push(grade);
+          console.log(`${student.name}: ${grade}`);
+        });
+
+        const average = grades.reduce((sum, grade) => sum += grade, 0) / courseStudents.length;
+        console.log(`Course Average: ${average}`);
+      }
+    },
+  };
 }
 
-// const foo = createStudent('Foo', '1st');
-// foo.info();
-// foo.listCourses();
-// foo.addCourse({ name: 'Math', code: 101 });
-// foo.addCourse({ name: 'Advanced Math', code: 102 });
-// foo.listCourses();
-// foo.addNote(101, 'Fun course');
-// foo.addNote(101, 'Remember to study for algebra');
-// foo.viewNotes();
-// foo.addNote(102, 'Difficult subject');
-// foo.viewNotes();
-// foo.updateNote(101, 'Fun course');
-// foo.viewNotes();
-
-// 04 School
-const VALID_YEARS = ['1st', '2nd', '3rd', '4th', '5th'];
-
-const school = {
-  students: [],
-  addStudent(name, year) {
-    if (VALID_YEARS.indexOf(year) === -1) {
-      console.log('Invalid year');
-      return;
-    }
-
-    const student = createStudent(name, year);
-    this.students.push(student);
-    return student;
-  },
-  enrollStudent(student, courseName, courseCode) {
-    student.addCourse({ name: courseName, code: courseCode });
-  },
-  addGrade(student, courseCode, grade) {
-    student.courses.forEach(studentCourse => {
-      if (studentCourse.code === courseCode) {
-        studentCourse.grade = grade;
-      }
-    });
-  },
-  getReportCard(student) {
-    student.courses.forEach(course => {
-      const grade = course.grade || 'In progress';
-      console.log(`${course.name}: ${grade}`);
-    });
-  },
-  courseReport(courseName) {
-    let grades = [];
-
-    if (this.noGradesAvailable(courseName)) {
-      return;
-    }
-
-    console.log(`=${courseName} Grades=`);
-
-    this.students.forEach(student => {
-      student.courses.forEach(course => {
-        if (course.name === courseName && course.grade) {
-          grades.push(course.grade);
-
-          console.log(`${student.name}: ${course.grade}`);
-        }
-      })
-    });
-
-    const average = grades.reduce((sum, grade) => sum += grade, 0) / grades.length;
-    console.log(`Course Average: ${Math.ceil(average)}`);
-  },
-  noGradesAvailable(courseName) {
-    const grades = this.students.flatMap(student => {
-      const course = student.courses.filter(course => course.name === courseName)[0];
-
-      if (course) {
-        return course.grade;
-      }
-    });
-
-    if (grades.some(grade => grade !== undefined)) {
-      return false;
-    }
-
-    return true;
-  }
-};
+const school = createSchool();
 
 const foo = school.addStudent('foo', '3rd');
-school.enrollStudent(foo, 'Math', 101 );
-school.addGrade(foo, 101, 93);
-school.enrollStudent(foo, 'Advanced Math', 102);
+school.enrollStudent(foo, { name: 'Math', code: 101 });
+school.enrollStudent(foo, { name: 'Advanced Math', code: 102 });
+school.enrollStudent(foo, { name: 'Physics', code: 202 });
+school.addGrade(foo, 101, 95);
 school.addGrade(foo, 102, 90);
-school.enrollStudent(foo, 'Physics', 202);
 
 const bar = school.addStudent('bar', '1st');
-school.enrollStudent(bar, 'Math', 101 );
+school.enrollStudent(bar, { name: 'Math', code: 101 });
 school.addGrade(bar, 101, 91);
 
 const qux = school.addStudent('qux', '2nd');
-school.enrollStudent(qux, 'Math', 101 );
+school.enrollStudent(qux, { name: 'Math', code: 101 });
+school.enrollStudent(qux, { name: 'Advanced Math', code: 102 });
 school.addGrade(qux, 101, 93);
-school.enrollStudent(qux, 'Advanced Math', 102);
 school.addGrade(qux, 102, 90);
