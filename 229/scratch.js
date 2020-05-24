@@ -1160,3 +1160,324 @@ var obj = {
 //     };
 //   })(start);
 // }
+
+// const obj1 = {
+//   firstName: 'Andrew',
+//   lastName: 'Ratliff',
+//   fullName: function() {
+//     return this.firstName + ' ' + this.lastName;
+//   }
+// };
+
+// const obj2 = Object.create(obj1);
+
+// var Lane = {
+//   name: 'Lane the Lamba',
+//   description: function() {
+//     return this.name;
+//   }
+// };
+// var description = Lane.description;
+// var Fred = {
+//   description: Lane.description,
+//   name: 'Fred the Functor',
+// }
+
+// function Dog() {
+//   this.speak = 'bark';
+// }
+
+// var puppy = new Dog();
+// puppy.speak = 'hi';
+
+// Dog.prototype.run = 'running';
+
+// var foo = {
+//   a: 1,
+// };
+
+// var bar = Object.create(foo);
+// bar.a = 1;
+// bar.b = 2;
+
+// function getDefiningObject(object, propKey) {
+//   if (object && object.hasOwnProperty(propKey)) {
+//     return object;
+//   } else if(object) {
+//     return getDefiningObject(Object.getPrototypeOf(object), propKey);
+//   }
+
+//   return null;
+// }
+
+// var foo = {
+//   a: 1,
+//   b: 2,
+// };
+
+// var bar = Object.create(foo);
+// var baz = Object.create(bar);
+// var qux = Object.create(baz);
+
+// bar.c = 3;
+
+// console.log(getDefiningObject(qux, 'c') === bar);     // => true
+// console.log(getDefiningObject(qux, 'e'));             // => null
+
+// function shallowCopy(object) {
+//   const copy = Object.create(Object.getPrototypeOf(object));
+
+//   Object.getOwnPropertyNames(object).forEach(propKey => {
+//     copy[propKey] = object[propKey];
+//   });
+
+//   return copy;
+// }
+
+// var foo = {
+//   a: 1,
+//   b: 2,
+// };
+
+// var bar = Object.create(foo);
+// bar.c = 3;
+// bar.say = function() {
+//   console.log('c is ' + this.c);
+// };
+
+// var baz = shallowCopy(bar);
+// console.log(baz.a);       // => 1
+// baz.say();                // => c is 3
+// baz.hasOwnProperty('a');  // false
+// baz.hasOwnProperty('b');  // false
+
+// function extend(destination, ...args) {
+//   Object.assign(destination, ...args);
+//   return destination;
+// }
+
+// var foo = {
+//   a: 0,
+//   b: {
+//     x: 1,
+//     y: 2,
+//   },
+// };
+
+// var joe = {
+//   name: 'Joe'
+// };
+
+// var funcs = {
+//   sayHello: function() {
+//     console.log('Hello, ' + this.name);
+//   },
+
+//   sayGoodBye: function() {
+//     console.log('Goodbye, ' + this.name);
+//   },
+// };
+
+// var object = extend({}, foo, joe, funcs);
+
+// console.log(object.b.x);          // => 1
+// object.sayHello();                // => Hello, Joe
+
+// function Animal(type) {
+//   this.type = type;
+// }
+
+// Animal.prototype.move = function() {
+//   console.log('Animal is moving.');
+// };
+
+// var Dog = function() {};
+// Dog.prototype = Object.create(Animal.prototype);
+
+// Dog.prototype.say = function() {
+//   console.log(this.name + ' says Woof!');
+// };
+
+// Dog.prototype.run = function() {
+//   console.log(this.name + ' runs away.');
+// };
+
+// var fido = new Dog();
+
+// var RECTANGLE = {
+//   area: function() {
+//     return this.width * this.height;
+//   },
+//   perimeter: function() {
+//     return 2 * (this.width + this.height);
+//   },
+// };
+
+// function Rectangle(width, height) {
+//   this.width = width;
+//   this.height = height;
+//   this.area = RECTANGLE.area.call(this);
+//   this.perimeter = RECTANGLE.perimeter.call(this);
+// }
+
+// var rect1 = new Rectangle(2, 3);
+// console.log(rect1.area);
+// console.log(rect1.perimeter);
+
+// function Circle(radius) {
+//   this.radius = radius;
+// }
+
+// Circle.prototype.area = function() {
+//   return Math.PI * this.radius ** 2;
+// };
+
+// var a = new Circle(3);
+// var b = new Circle(4);
+
+// console.log(a.area().toFixed(2)); // => 28.27
+// console.log(b.area().toFixed(2)); // => 50.27
+
+// var ninjaA;
+// var ninjaB;
+// function Ninja() {
+//   this.swung = false;
+// }
+
+// ninjaA = new Ninja();
+// ninjaB = new Ninja();
+
+// // Add a swing method to the Ninja prototype which
+// // returns the calling object and modifies swung
+// Ninja.prototype.swing = function () {
+//   this.swung = true;
+//   return this;
+// };
+
+// console.log(ninjaA.swing().swung);      // must log true
+// console.log(ninjaB.swing().swung);      // must log true
+
+// var ninjaA = (function() {
+//   function Ninja(){};
+//   return new Ninja();
+// })();
+
+// var ninjaB = new ninjaA.constructor();
+
+// console.log(ninjaB.constructor === ninjaA.constructor);    // should log true
+
+// var shape = {
+//   getType() {
+//     return this.type;
+//   },
+// };
+
+// function Triangle(a, b, c) {
+//   this.a = a;
+//   this.b = b;
+//   this.c = c;
+//   this.type = 'triangle';
+// }
+
+// Triangle.prototype = shape;
+// Triangle.prototype.constructor = Triangle;
+
+// Triangle.prototype.getPerimeter = function() {
+//   return this.a  + this.b + this.c;
+// };
+
+// var t = new Triangle(3, 4, 5);
+
+// function User(first, last) {
+//   if (this instanceof User) {
+//     this.name = first + ' ' + last;
+//   } else {
+//     return new User(first, last);
+//   }
+// }
+
+// var name = 'Jane Doe';
+// var user1 = new User('John', 'Doe');
+// var user2 = User('John', 'Doe');
+
+// console.log(name);         // => Jane Doe
+// console.log(user1.name);   // => John Doe
+// console.log(user2.name);   // => John Doe
+
+// function createObject(obj) {
+//   function F() {};
+//   F.prototype = obj;
+//   return new F();
+// }
+
+// // var foo = {
+// //   a: 1
+// // };
+
+// // var bar = createObject(foo);
+// // foo.isPrototypeOf(bar);         // true
+
+// Object.prototype.begetObject = function() {
+//   return createObject(this);
+// };
+
+// var foo = {
+//   a: 1,
+// };
+
+// var bar = foo.begetObject();
+// foo.isPrototypeOf(bar);         // true
+
+// function neww(constructor, args) {
+//   const obj = Object.create(constructor.prototype);
+//   const result = constructor.apply(obj, args);
+
+//   return typeof result === 'object' ? result : object;
+// }
+
+// function Person(firstName, lastName) {
+//   this.firstName = firstName;
+//   this.lastName = lastName;
+// }
+
+// Person.prototype.greeting = function() {
+//   console.log('Hello, ' + this.firstName + ' ' + this.lastName);
+// };
+
+// var john = neww(Person, ['John', 'Doe']);
+
+// function newPerson(name) {
+//   this.name = name;
+
+//   Object.defineProperties(this, {
+//     log: {
+//       value: function() { console.log(this.name) },
+//       writable: false,
+//     }
+//   });
+
+//   return this;
+// }
+
+// var me = newPerson('Andrew Ratliff');
+// me.log();
+// me.log = function() { console.log('Other Name') };
+// me.log();
+
+// function Foo(a, b) {
+//  this.a = a;
+//  this.b = b;
+// }
+
+// Foo.prototype = {
+//   bar: function() {
+//     console.log(this.a);
+//   },
+//   baz: function() {
+//     console.log(this.b);
+//   },
+// };
+
+// var myFoo = new Foo('bar', 'baz');
+
+// myFoo.hasOwnProperty('a');   // true
