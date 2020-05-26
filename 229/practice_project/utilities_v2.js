@@ -46,7 +46,7 @@ function _(element) {
         const result = [];
 
         for (let i = 1; i <= arg; i += 1) {
-          let el = copy.splice(copy[getRandomInt(0, copy.length - 1)]);
+          let el = copy.splice(copy[getRandomInt(0, copy.length - 1)], 1);
           result.push(el);
         };
 
@@ -67,7 +67,7 @@ function _(element) {
     },
     pluck(arg) {
       return element.reduce((result, obj) => {
-        if (obj[arg]) {
+        if (obj.hasOwnProperty(arg)) {
           result.push(obj[arg]);
         }
 
@@ -101,10 +101,14 @@ function _(element) {
     has(arg) {
       return Object.getOwnPropertyNames(element).includes(arg);
     },
-    isArray(arg) {
-    }
   };
 };
+
+(['isElement']).forEach(function(method) {
+  _[method] = function() {
+    _[method].call(_, method);
+  };
+});
 
 _.range = function(...args) {
   const result = [];
@@ -127,9 +131,33 @@ _.extend = function(obj, ...args) {
 };
 
 _.isElement = function(arg) {
-
+  return arg && arg.nodeType === 1;
 };
 
-_.isArray = function(arg) {
-  return Array.isArray(arg);
+_.isArray = Array.isArray || function(arg) {
+  return toString.call(arg) === '[object Array]';
+};
+
+_.isObject = function(arg) {
+  const type = typeof arg;
+
+  return type === 'function' || type === 'object' && !!arg;
+};
+
+_.isFunction = function(arg) {
+  const type = typeof arg;
+
+  return type === 'function';
+};
+
+_.isBoolean = function(arg) {
+  return toString.call(arg) === '[object Boolean]';
+};
+
+_.isString = function(arg) {
+  return toString.call(arg) === '[object String]';
+};
+
+_.isNumber = function(arg) {
+  return toString.call(arg) === '[object Number]';
 };
