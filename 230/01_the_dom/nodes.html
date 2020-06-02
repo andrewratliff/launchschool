@@ -23,5 +23,15 @@
         </p>
       </form>
     </div>
+    <script>
+      function walk(node, callback) {
+        callback(node);
+        node.childNodes.forEach(child => walk(child, callback));
+      }
+
+      walk(document.body, function(node) {
+        console.log(node.nodeName);
+      });
+    </script>
   </body>
 </html>
