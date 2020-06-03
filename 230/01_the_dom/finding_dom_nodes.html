@@ -15,19 +15,23 @@
       }
 
       function findAllParagraphs() {
-        const paragraphs = [];
+        return getElementsByTagName('P');
+      }
+
+      function getElementsByTagName(tagName) {
+        const elements = [];
 
         walk(document, function(node) {
-          if (node.nodeName === 'P') {
-            paragraphs.push(node);
+          if (node.nodeName === tagName) {
+            elements.push(node);
           }
-        });
+        })
 
-        return paragraphs;
+        return elements;
       }
 
       function addClassToNodes(className, nodes) {
-        nodes.forEach(node => node.classList.add('article-text'));
+        nodes.forEach(node => node.classList.add(className));
       }
     </script>
   </body>
