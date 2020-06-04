@@ -5,24 +5,6 @@
     <title>Tree Slicing</title>
   </head>
   <body>
-    <div>
-      Hello, <em>world!</em>
-    </div>
-    <script>
-      function treeSlicing(startId, endId) {
-        const parent = document.getElementById(startId);
-        const innermostChild = document.getElementById(endId);
-        const tagNames = [];
-
-        if (!parent || !innermostChild) {
-          return undefined;
-        }
-
-        // start from the end
-        // check to see if you've reached the body element
-            // if so, there is no direct path
-      }
-    </script>
     <article id="1">1
       <header id="2">2
         <span id="3">3
@@ -66,4 +48,5 @@
       </footer>
     </article>
   </body>
+  <script src="tree_slicing.js"></script>
 </html>
