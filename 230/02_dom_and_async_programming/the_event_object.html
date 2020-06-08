@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>The Event Object</title>
+    <style>
+      body { padding: 1em; }
+      .example { border: dotted 2px blue; padding: .5em 1em;}
+      .example ul { border: dotted 2px red; padding: 1em;}
+      .example li { border: dotted 2px purple; padding: 1em; }
+      .example span { border: dotted 2px green; padding: 0.5em; }
+
+      div:hover, ul:hover, li:hover, span:hover {
+        border-style: solid;
+      }
+    </style>
+    <script>
+      document.addEventListener('click', event => {
+        let element = event.target;
+        let p = document.getElementById('message');
+
+        console.log(event.currentTarget);
+
+        p.textContent = element.tagName;
+      });
+    </script>
+  </head>
+  <body>
+    <div class="example">
+      <ul>
+        <li><span>First</span> element</li>
+        <li><span>Second</span> element</li>
+        <li><span>Third</span> element</li>
+      </ul>
+    </div>
+    <p>The last clicked element was: <span id="message">none</span>.</p>
+  </body>
+</html>

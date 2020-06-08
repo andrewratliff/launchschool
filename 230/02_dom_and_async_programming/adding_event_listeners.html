@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Test Page</title>
+    <script>
+      function displayAlert() {
+        const message = document.getElementById('message').value;
+        alert(message);
+      }
+
+      document.addEventListener('DOMContentLoaded', function() {
+        const button = document.getElementById('alert');
+        button.addEventListener('click', displayAlert);
+      });
+    </script>
+  </head>
+  <body>
+    <textarea id="message"></textarea>
+    <button id="alert">Alert</button>
+  </body>
+</html>

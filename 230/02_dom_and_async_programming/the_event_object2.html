@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      .x {
+        position: absolute;
+        transform: rotate(45deg);
+        top: 20px;
+        left: 20px;
+      }
+
+      .x .horizontal {
+        width: 45px;
+        height: 5px;
+        position: absolute;
+        left: -20px;
+        background: red;
+      }
+
+      .x .vertical {
+        height: 45px;
+        width: 5px;
+        background: red;
+        position: absolute;
+        left: 0px;
+        top: -20px;
+      }
+    </style>
+    <script>
+      document.addEventListener('mousemove', event => {
+        const x = document.querySelector('.x');
+        x.style.top = `${event.clientY}px`;
+        x.style.left = `${event.clientX}px`;
+      });
+
+      document.addEventListener('keydown', event => {
+        let key = event.key;
+        let color;
+
+        if (key === 'b') {
+          color = 'blue';
+        } else if (key === 'r') {
+          color = 'red';
+        } else if (key === 'g') {
+          color = 'green';
+        }
+
+        if (color) {
+          const x = document.querySelector('.x');
+
+          for (let i = 0; i < x.children.length; i += 1) {
+            x.children[i].style.background = color;
+          }
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <div class="x">
+      <div class="horizontal"></div>
+      <div class="vertical"></div>
+    </div>
+  </body>
+</html>
