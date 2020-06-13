@@ -1,16 +1,20 @@
-// const id = setInterval(function() { console.log('hi'); }, 2000);
+let counterId;
 
-// 1
 function startCounting() {
-  let count = 0;
+  let start = 1;
 
-  return setInterval(function() { console.log(count += 1); }, 1000);
+  function logNum() {
+    console.log(start);
+    start += 1;
+  }
+
+  counterId  = setInterval(logNum, 1000);
 }
 
 function stopCounting() {
-  clearInterval(id);
+  clearInterval(counterId);
 }
 
-const id = startCounting();
+startCounting();
 
-setTimeout(stopCounting, 5000);
+setTimeout(stopCounting, 10000);

@@ -22,6 +22,11 @@
           <button type="submit" id="submitButton">Subscribe</button>
         </p>
       </form>
+      <p class="intro" id="simple">
+        To receive our weekly emails, enter your email address below.
+        <a href="info.html">Get more info</a>.
+      </p>
+      <p class="intro" id="simple2">To receive our weekly emails, enter your email address below. <a href="info.html">Get more info</a>.</p>
     </div>
     <script>
       function walk(node, callback) {
@@ -29,8 +34,13 @@
         node.childNodes.forEach(child => walk(child, callback));
       }
 
-      walk(document.body, function(node) {
-        console.log(node.nodeName);
+      <!-- walk(document.body, function(node) { -->
+      <!--   console.log(node.nodeName); -->
+      <!-- }); -->
+
+      document.addEventListener('DOMContentLoaded', () => {
+        console.log(document.querySelector('#simple').childNodes);
+        console.log(document.querySelector('#simple2').childNodes);
       });
     </script>
   </body>
