@@ -1,62 +1,46 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
+  const messageElement = document.querySelector("p");
   const form = document.querySelector('form');
-  const input = document.querySelector('#guess');
-  const paragraph = document.querySelector('p');
-  const button = document.querySelector('input[type=submit]');
-  let answer = newAnswer();
+  const guessInput = document.querySelector('#guess');
+  const newGameLink = document.querySelector('a');
+  let answer;
+  let message;
   let guessCount;
+  let guess;
 
-  function resetGame() {
-    answer = newAnswer();
+  function newGame() {
+    answer = getRandomIntInclusive(1, 100)
+    message = "Guess a number from 1 to 100";
     guessCount = 0;
-    input.value = '';
-    button.disabled = false;
-    paragraph.textContent = 'Guess a number between 1 and 100';
+    messageElement.textContent = message;
+    console.log(answer);
   }
 
-  form.addEventListener('submit', event => {
+  form.addEventListener("submit", event => {
     event.preventDefault();
-    let guess = parseInt(input.value, 10);
+    guess = parseInt(guessInput.value, 10);
 
-    if (invalidInput(guess)) {
-      return;
-    }
-
-    guessCount += 1;
-    let message;
-
-    if (guess < answer) {
+    if (answer > guess) {
       message = `My number is higher than ${guess}`;
-    } else if (guess > answer) {
+    } else if (answer < guess) {
       message = `My number is lower than ${guess}`;
-    } else {
-      message = `Correct. It took you ${guessCount} guesses.`;
-      button.disabled = true;
+    } else if (answer === guess) {
+      message = "That's a bingo";
     }
 
-    paragraph.textContent = message;
+    messageElement.textContent = message;
   })
 
-  document.querySelector('a').addEventListener('click', event => {
+  newGameLink.addEventListener("click", event => {
     event.preventDefault();
-    resetGame();
+    newGame();
   })
 
-  resetGame();
+  newGame();
 })
 
-function newAnswer() {
-  return Math.floor(Math.random() * 100) + 1;
-}
-
-function invalidInput(guess) {
-  if (Number.isNaN(guess)) {
-    alert('Please enter a number');
-    return true;
-  } else if (guess < 0 || guess > 100) {
-    alert('Please enter a number between 1 and 100');
-    return true;
-  }
-
-  return false;
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }

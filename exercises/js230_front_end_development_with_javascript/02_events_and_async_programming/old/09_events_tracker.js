@@ -1,31 +1,26 @@
-const tracker = (function() {
-  const items = []
-
+const tracker = (function(items = new Set) {
   return {
     list() {
-      return items.slice();
+      return [...items];
     },
     elements() {
-
+      return items.map(function(event) {
+        return event.target;
+      });
     },
     clear() {
-
+      items.length = 0;
+      return items.length;
     },
     add(element) {
-      items.push(element);
-    },
-    isTracked(event) {
-      return items.includes(event);
+      items.add(element);
     },
   };
 })();
 
 function track(callback) {
   return function(event) {
-    if (!tracker.isTracked(event)) {
-      tracker.add(event);
-    }
-
+    tracker.add(event);
     callback(event);
   };
 }
@@ -35,8 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const divBlue = document.getElementById('blue');
   const divOrange = document.getElementById('orange');
   const divGreen = document.getElementById('green');
-
-  console.log(divRed);
 
   divRed.addEventListener('click', track(function(event) {
     document.body.style.background = 'red';
@@ -55,4 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.background = 'green';
   }));
 
+  // from LS solutions
+  const createClickEv   = _ => new MouseEvent('click', { view: window, bubbles: true, cancelable: true })
+  const dispatchClickEv = elem => elem.dispatchEvent(createClickEv());
+  [divBlue, divRed, divOrange, divGreen].forEach(dispatchClickEv)
 });

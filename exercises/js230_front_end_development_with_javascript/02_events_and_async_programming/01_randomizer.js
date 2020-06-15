@@ -1,3 +1,21 @@
+// function randomizer(...callbacks) {
+//   const MAX = callbacks.length * 2;
+
+//   for (let i = 1; i <= MAX; i += 1) {
+//     setTimeout(console.log, i * 1000, i);
+//   };
+
+//   callbacks.forEach(callback => {
+//     setTimeout(callback, getRandomSeconds(MAX));
+//   });
+// }
+
+function getRandomSeconds(max) {
+  min = 1;
+  max = Math.floor(max);
+  return 1000 * (Math.floor(Math.random() * (max - min + 1)) + min);
+}
+
 function callback1() {
   console.log('callback1');
 }
@@ -10,44 +28,30 @@ function callback3() {
   console.log('callback3');
 }
 
-function randomizer(...callbacks) {
-  const ONE_SECOND = 1000;
-  const maxTime = callbacks.length * 2;
-  let elapsedTime = 0;
 
-  function randomSecond() {
-    return Math.floor(Math.random() * maxTime + 1) * ONE_SECOND;
-  }
+// Ian Evans solution:
 
-  let intervalId = setInterval(function() {
-    console.log(elapsedTime += 1);
+// function randomizer(...callbacks) {
+//   let elapsed = 0;
+//   const MAX = callbacks.length * 2;
+//   const timeouts = {};
 
-    if (elapsedTime >= maxTime) {
-      clearInterval(intervalId);
-    }
-  }, ONE_SECOND);
+//   callbacks.forEach(callback => {
+//     const id = setTimeout(function() {
+//       callback();
+//       timeouts[id] = 'cleared';
+//     }, getRandomSeconds(MAX));
 
-  callbacks.forEach(callback => {
-    setTimeout(callback, randomSecond());
-  });
-}
+//     timeouts[id] = 'waiting';
+//   });
 
-function randomizer(...callbacks) {
-  const ONE_SECOND = 1000;
-  const maxTime = callbacks.length * 2;
-  let elapsedTime = 0;
+//   let timer = setInterval(function() {
+//     elapsed += 1;
 
-  function randomSecond() {
-    return Math.floor(Math.random() * maxTime + 1) * ONE_SECOND;
-  }
+//     const allClear = Object.values(timeouts).every(value => {
+//       return value === 'cleared'
+//     });
 
-  for (let i = 0; i < maxTime; i += 1) {
-    elapsedTime += 1;
-    setTimeout(console.log, i * 1000, elapsedTime);
-  };
-
-  callbacks.forEach(callback => setTimeout(callback, randomSecond()));
-}
-
-
-randomizer(callback1, callback2, callback3);
+//     allClear ? clearInterval(timer) : console.log(elapsed);
+//   }, 1000);
+// }
