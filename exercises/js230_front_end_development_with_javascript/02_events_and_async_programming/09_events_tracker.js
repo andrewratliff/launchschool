@@ -1,27 +1,28 @@
-const tracker = (function(items = new Set) {
+function createTracker() {
+  const events = [];
+
   return {
-    list() {
-      return [...items];
+    add(event) {
+      events.push(event);
     },
     elements() {
-      return items.map(function(event) {
-        return event.target;
-      });
+      return this.list().map(event => event.target);
+    },
+    list() {
+      return [...events];
     },
     clear() {
-      items.length = 0;
-      return items.length;
-    },
-    add(element) {
-      items.add(element);
-    },
-  };
-})();
+      events.length = 0;
+    }
+  }
+}
+
+const tracker = createTracker();
 
 function track(callback) {
   return function(event) {
     tracker.add(event);
-    callback(event);
+    return callback(event);
   };
 }
 
@@ -48,8 +49,17 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.background = 'green';
   }));
 
-  // from LS solutions
-  const createClickEv   = _ => new MouseEvent('click', { view: window, bubbles: true, cancelable: true })
-  const dispatchClickEv = elem => elem.dispatchEvent(createClickEv());
-  [divBlue, divRed, divOrange, divGreen].forEach(dispatchClickEv)
-});
+  // divBlue.dispatchEvent(new Event('click'));
+  // divRed.dispatchEvent(new Event('click'));
+  // divOrange.dispatchEvent(new Event('click'));
+  // divGreen.dispatchEvent(new Event('click'));
+
+  tracker.list().length
+  tracker.elements()
+  tracker.elements()[0] === document.querySelector('#blue')
+  tracker.elements()[3] === document.querySelector('#green')
+  tracker.clear()
+  tracker.list()
+  tracker.list()[0] = 'abc'
+  tracker.list().length
+})

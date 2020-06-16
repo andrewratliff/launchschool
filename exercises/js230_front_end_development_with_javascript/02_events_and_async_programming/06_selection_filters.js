@@ -1,53 +1,55 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const classifications = document.querySelector('#animal-classifications');
-  const animals = document.querySelector('#animals');
-  const clearButton = document.querySelector('#clear');
+const options = {
+  'animal-classifications': {
+    'Classifications': [],
+    'Vertebrate': ['Bear', 'Turtle', 'Whale', 'Salmon', 'Ostrich'],
+    'Warm-blooded': ['Bear', 'Whale', 'Ostrich'],
+    'Cold-blooded': ['Salmon', 'Turtle'],
+    'Mammal': ['Bear', 'Whale'],
+    'Bird': ['Ostrich'],
+  },
+  'animals': {
+    'Animals': [],
+    'Bear': ['Vertebrate', 'Warm-blooded', 'Mammal'],
+    'Turtle': ['Vertebrate', 'Cold-blooded'],
+    'Whale': ['Vertebrate', 'Warm-blooded', 'Mammal'],
+    'Salmon': ['Vertebrate', 'Cold-blooded'],
+    'Ostrich': ['Vertebrate', 'Warm-blooded', 'Bird'],
+  },
+};
 
-  classifications.addEventListener('change', function(event) {
-    const options = {
-      'Vertebrate': ['Bear', 'Turtle', 'Whale', 'Salmon', 'Ostrich'],
-      'Warm-blooded': ['Bear', 'Whale', 'Ostrich'],
-      'Cold-blooded': ['Salmon', 'Turtle'],
-      'Mammal': ['Bear', 'Whale'],
-      'Bird': ['Ostrich'],
-    }
+document.addEventListener('input', event => {
+  const dropdownId = event.target.id;
+  const choice = event.target.value;
+  const newOptions = options[dropdownId][choice];
+  let otherDropdown;
 
-    const selection = event.target.value;
-    updateOptions(animals, options[selection]);
-  });
 
-  animals.addEventListener('change', function(event) {
-    const options = {
-      'Bear': ['Vertebrate', 'Warm-blooded', 'Mammal'],
-      'Turtle': ['Vertebrate', 'Cold-blooded'],
-      'Whale': ['Vertebrate', 'Warm-blooded', 'Mammal'],
-      'Salmon': ['Vertebrate', 'Cold-blooded'],
-      'Ostrich': ['Vertebrate', 'Warm-blooded', 'Bird'],
-    }
+  if (dropdownId === 'animal-classifications') {
+    otherDropdown = document.getElementById('animals');
+  } else if (dropdownId === 'animals') {
+    otherDropdown = document.getElementById('animal-classifications');
+  }
 
-    const selection = event.target.value;
-    updateOptions(classifications, options[selection]);
-  });
+  setOptions(otherDropdown, newOptions);
+});
 
-  clearButton.addEventListener('click', function(event) {
+document.addEventListener('click', event => {
+  if (event.target.id === 'clear') {
     event.preventDefault();
-    const classificationDefaults = ['Classifications', 'Vertebrate', 'Warm-blooded', 'Cold-blooded', 'Mammal', 'Bird'];
-    const animalDefaults = ['Animals', 'Bear', 'Turtle', 'Whale', 'Salmon', 'Ostrich'];
+    const classifications = document.getElementById('animal-classifications');
+    const animals = document.getElementById('animals');
 
-    updateOptions(classifications, classificationDefaults);
-    updateOptions(animals, animalDefaults);
-  })
-
-  function updateOptions(element, options) {
-    element.options.length = 0;
-
-    options.forEach(option => {
-      const optionElement = document.createElement('option');
-      optionElement.value = option;
-      optionElement.text = option;
-
-      element.add(optionElement);
-      return optionElement;
-    });
+    setOptions(classifications, Object.keys(options[classifications.id]));
+    setOptions(animals, Object.keys(options[animals.id]));
   }
 })
+
+function setOptions(element, options) {
+  element.options.length = 0;
+
+  options.forEach(option => {
+    const optionElement = document.createElement('option');
+    optionElement.text = option;
+    element.add(optionElement);
+  });
+}

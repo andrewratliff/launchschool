@@ -1,0 +1,27 @@
+function delegateEvent(parentElement, selector, eventType, callback) {
+  const innerElements = [...document.querySelectorAll(selector)];
+  let eventAdded;
+
+  parentElement.addEventListener(eventType, event => {
+    if (innerElements.includes(event.target)) {
+      eventAdded = true;
+      callback(event);
+    }
+  });
+
+  return eventAdded;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  var element1 = document.querySelector('table');
+  var element2 = document.querySelector('main h1');
+  var element3 = document.querySelector('main');
+
+  var callback = function(event) {
+    alert('Target: ' + event.target.tagName + '\nCurrent Target: ' + event.currentTarget.tagName);
+  };
+
+  console.log(delegateEvent(element1, 'p', 'click', callback));
+  // console.log(delegateEvent(element3, 'h1', 'click', callback));
+  console.log(delegateEvent(element3, 'aside p', 'click', callback));
+})

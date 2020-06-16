@@ -1,24 +1,31 @@
 document.addEventListener('click', event => {
+  event.preventDefault();
   removeHighlights();
 
-  const target = event.target;
-  const article = target.closest('article');
+  if (event.target.tagName === 'A') {
+    const id = event.target.href.split('#')[1];
+    const article = document.getElementById(id);
 
-  if (target.tagName === 'A') {
-    event.preventDefault();
-    const hash = target.hash;
-    const article = document.querySelector(hash)
     article.classList.add('highlight');
     article.scrollIntoView();
-  } else if (article) {
-    article.classList.add('highlight');
   } else {
-    document.querySelector('main').classList.add('highlight');
+    highlightArticleAncestor(event.target);
   }
-});
+})
 
 function removeHighlights() {
-  const highlighted = document.getElementsByClassName('highlight');
+  const highlighted = [...document.querySelectorAll('.highlight')];
+  highlighted.forEach(el => el.classList.remove('highlight'));
+}
 
-  [...highlighted].forEach(el => el.classList.remove('highlight'));
+function highlightArticleAncestor(element) {
+  let parent = element.parentElement;
+
+  while (parent.tagName !== 'ARTICLE' && parent !== document.body) {
+    parent = parent.parentElement;
+  };
+
+  if (parent.tagName === 'ARTICLE') {
+    parent.classList.add('highlight');
+  }
 }
