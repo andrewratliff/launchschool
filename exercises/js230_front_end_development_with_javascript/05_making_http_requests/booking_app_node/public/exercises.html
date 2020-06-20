@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Exercises</title>
+    <script src="javascripts/exercises.js"></script>
+    <style>
+      dl {
+        border: 3px double #ccc;
+        padding: 0.5em;
+      }
+      dt {
+        float: left;
+        clear: left;
+        width: 200px;
+        text-align: right;
+        font-weight: bold;
+        color: #f0595b;
+      }
+      dt::after {
+        content: ":";
+      }
+      dd {
+        margin: 0 0 0 110px;
+        padding: 0 0 0.5em 0;
+      }
+
+      input[type="submit"] {
+        color: #fff;
+        background: #f0595b;
+        border-color: #f0595b;
+        border-radius: 5px;
+        width: 100px;
+        height: 50px;
+      }
+    </style>
+</head>
+<body>
+  <form id="staff" action="api/staff_members" method="post">
+    <dl>
+      <dt>
+        <label for="email">Email</label>
+      </dt>
+      <dd>
+        <input type="email" name="email" id="email" >
+      </dd>
+      <dt>
+        <label for="name">Name</label>
+      </dt>
+      <dd>
+        <input type="text" name="name" id="name" >
+      </dd>
+    </dl>
+    <input type="submit" value="Submit">
+  </form>
+
+  <form id="schedule" action="api/staff_members" method="post">
+    <dl id="schedule-1">
+      <dt>
+      <label for="staff_name">Staff Name</label>
+      </dt>
+      <dd>
+      <select name="staff_name" id="staff_name" >
+      </dd>
+      <dt>
+      <label for="date">Date:</label>
+      </dt>
+      <dd>
+      <input type="datepicker" name="date" id="date" >
+      </dd>
+    </dl>
+    <input type="submit" value="Submit">
+  </form>
+</body>
+</html>

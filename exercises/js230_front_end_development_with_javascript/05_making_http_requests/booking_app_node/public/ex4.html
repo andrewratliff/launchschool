@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Exercises</title>
+    <script src="javascripts/ex4.js"></script>
+    <style>
+      dl {
+        border: 3px double #ccc;
+        padding: 0.5em;
+      }
+      dt {
+        float: left;
+        clear: left;
+        width: 200px;
+        text-align: right;
+        font-weight: bold;
+        color: #f0595b;
+      }
+      dt::after {
+        content: ":";
+      }
+      dd {
+        margin: 0 0 0 110px;
+        padding: 0 0 0.5em 0;
+      }
+
+      input[type="submit"] {
+        color: #fff;
+        background: #f0595b;
+        border-color: #f0595b;
+        border-radius: 5px;
+        width: 100px;
+        height: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="add">Add more schedules</button>
+    <form id="schedule" action="api/schedules" method="post">
+      <dl>
+        <dt>
+        <label for="name">Staff Name</label>
+        </dt>
+        <dd>
+        <select name="staff_id" id="name">
+        </select>
+        </dd>
+        <dt>
+        <label for="date">Date</label>
+        </dt>
+        <dd>
+        <input type="date" name="date" id="date" >
+        </dd>
+        <dt>
+        <label for="time">Time</label>
+        </dt>
+        <dd>
+        <input type="time" name="time" id="time" placeholder="hh:mm">
+        </dd>
+      </dl>
+      <input type="submit" value="Submit">
+    </form>
+  </body>
+</html>
