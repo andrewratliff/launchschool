@@ -8,7 +8,6 @@
     <script src="javascripts/ex4.js"></script>
     <style>
       dl {
-        border: 3px double #ccc;
         padding: 0.5em;
       }
       dt {
@@ -26,8 +25,19 @@
         margin: 0 0 0 110px;
         padding: 0 0 0.5em 0;
       }
-
+      button {
+        display: inline-block;
+        margin-top: 15px;
+        color: #fff;
+        background: #5CAFDE;
+        border-color: #5CAFDE;
+        border-radius: 5px;
+        width: 100px;
+        height: 50px;
+      }
       input[type="submit"] {
+        display: inline-block;
+        margin-top: 15px;
         color: #fff;
         background: #f0595b;
         border-color: #f0595b;
@@ -39,28 +49,7 @@
   </head>
   <body>
     <button id="add">Add more schedules</button>
-    <form id="schedule" action="api/schedules" method="post">
-      <dl>
-        <dt>
-        <label for="name">Staff Name</label>
-        </dt>
-        <dd>
-        <select name="staff_id" id="name">
-        </select>
-        </dd>
-        <dt>
-        <label for="date">Date</label>
-        </dt>
-        <dd>
-        <input type="date" name="date" id="date" >
-        </dd>
-        <dt>
-        <label for="time">Time</label>
-        </dt>
-        <dd>
-        <input type="time" name="time" id="time" placeholder="hh:mm">
-        </dd>
-      </dl>
+    <form id="schedule" action="/api/schedules" method="post">
       <input type="submit" value="Submit">
     </form>
   </body>
