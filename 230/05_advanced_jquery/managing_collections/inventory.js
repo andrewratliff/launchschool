@@ -11,17 +11,13 @@ let inventory;
       dd.textContent = date.toUTCString();
     },
     cacheTemplate() {
-      const inventory_item = document.getElementById("inventory_item");
-      this.template = inventory_item.innerHTML;
-      inventory_item.remove();
+      const source = document.getElementById("itemTemplate");
+      this.template = Handlebars.compile(source.innerHTML);
+      source.remove();
     },
     addItem() {
-      const regex = /ID/g;
       index += 1;
-
-      console.log(this);
-      const html = this.template.replace(regex, index);
-
+      const html = this.template({id: index});
       this.appendToTable(html);
       this.collection.push({
         id: index,
@@ -34,15 +30,15 @@ let inventory;
       const table = document.getElementById("inventory");
       const tr = document.createElement("tr");
       tr.innerHTML = html;
-      table.appendChild(tr);
+      table.append(tr);
     },
     updateItem(event) {
       const id = parseInt(event.target.name.split("_").slice(-1)[0], 10);
       const inputs = event.target.closest("tr").querySelectorAll("input");
       const obj = {
-        name: inputs[1].value,
-        stockNumber: inputs[2].value,
-        quantity: inputs[3].value,
+        name: inputs[0].value,
+        stockNumber: inputs[1].value,
+        quantity: inputs[2].value,
       };
       const item = this.findItem(id);
       Object.keys(obj).forEach(key => item[key] = obj[key]);

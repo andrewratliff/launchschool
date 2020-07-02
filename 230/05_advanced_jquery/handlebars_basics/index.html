@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Handlebars Basics</title>
+    <meta charset="utf-8" />
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <script id="post" type="text/x-handlebars">
+      <article>
+        <h1>{{title}}</h1>
+        <p><time>Posted on {{published}}</time></p>
+        {{{body}}}
+        <ul>
+          {{#if tags}}
+          Tags:
+          {{#each tags}}
+            {{>tag}}
+          {{/each}}
+          {{else}}
+            Not tagged
+          {{/if}}
+        </ul>
+      </article>
+    </script>
+    <script id="tag" type="text/x-handlebars-template">
+      <li>{{this}}</li>
+    </script>
+    <script>
+      const post = {
+        title: 'Lorem ipsum dolor sit amet',
+        published: 'April 1, 2015',
+        body: 'Sed ut perspiciatis unde <em>omnis</em> iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.',
+        tags: ['first', 'second', 'third'],
+      };
+      const post2 = {
+        title: 'Lorem ipsum dolor sit amet',
+        published: 'April 1, 2015',
+        body: 'Sed ut perspiciatis unde <em>omnis</em> iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.',
+      };
+
+      const posts = [post, post2];
+
+      Handlebars.registerPartial('tag', document.getElementById("tag").innerHTML);
+
+      const postTemplate = Handlebars.compile(document.getElementById("post").innerHTML);
+
+      posts.forEach(post => {
+        document.body.innerHTML += postTemplate(post);
+      });
+    </script>
+  </body>
+</html>
