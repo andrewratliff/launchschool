@@ -28,9 +28,7 @@ let inventory;
     },
     appendToTable(html) {
       const table = document.getElementById("inventory");
-      const tr = document.createElement("tr");
-      tr.innerHTML = html;
-      table.append(tr);
+      table.insertAdjacentHTML("beforeend", html);
     },
     updateItem(event) {
       const id = parseInt(event.target.name.split("_").slice(-1)[0], 10);
