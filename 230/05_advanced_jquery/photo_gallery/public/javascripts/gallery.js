@@ -16,8 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
       photos = data;
       displayPhotos(photos);
       displayPhotoInfo(photos[0]);
-      displayComments(photos[0]);
-      currentPhotoId = photos[0].id;
+      displayComments(photos[0].id);
     })
 
   function displayPhotos(photos) {
@@ -30,8 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector("section > header").innerHTML = html;
   }
 
-  function displayComments(photo) {
-    const id = photo.id;
+  function displayComments(id) {
     fetch(`/comments?photo_id=${id}`)
       .then(response => response.json())
       .then(comments => {
@@ -94,20 +92,20 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", event => {
     event.preventDefault();
     const formData = new FormData(form);
+    const searchParams = new URLSearchParams([...formData]);
+    const photoId = slides.querySelector("figure").dataset.id;
+
+    searchParams.set("photo_id", photoId);
+
     const options = {
       method: form.method,
-      body: new URLSearchParams([...formData]),
+      body: searchParams,
     }
 
     fetch("/comments/new", options)
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
+      .then(response => {
+        response.json()
+        displayComments(photoId);
       })
   })
-
-  function currentPhotoId() {
-    const id = slides.querySelectorAll("figure").dataset.id;
-    return id;
-  }
 });
