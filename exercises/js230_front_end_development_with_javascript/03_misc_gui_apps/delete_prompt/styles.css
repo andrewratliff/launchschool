@@ -1,0 +1,31 @@
+body {
+  background: #226543;
+  padding: 20px;
+  color: #000;
+  font-size: 18px;
+  display: block;
+  margin: 8px;
+}
+
+h2 {
+  color: white;
+}
+
+ul {
+  list-style: none;
+  width: 600px;
+}
+
+li {
+    padding: 16px 20px 0 20px;
+    box-sizing: border-box;
+    background: #fff;
+    color: #222;
+    height: 50px;
+    margin-bottom: 20px;
+    text-indent: 0;
+    border-radius: 5px;
+    position: relative;
+    display: list-item;
+    text-align: match-parent;
+}
