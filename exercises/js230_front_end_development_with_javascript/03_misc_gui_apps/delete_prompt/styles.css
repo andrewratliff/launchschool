@@ -29,3 +29,39 @@ li {
     display: list-item;
     text-align: match-parent;
 }
+
+span.remove {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  transform: rotate(45deg);
+  right: 20px;
+  cursor: pointer;
+}
+
+span.remove::before, span.remove::after {
+  background: #ec5555;
+  content: "";
+  position: absolute;
+}
+span.remove {
+  cursor: pointer;
+}
+
+span.remove::before {
+  height: 3px;
+  top: 50%;
+  right: 0;
+  left: 0;
+  margin-top: -1px;
+}
+
+span.remove::after {
+  width: 3px;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  margin-left: -1px;
+}
