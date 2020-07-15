@@ -10,13 +10,15 @@
   <body>
     <h2>Todos</h2>
     <ul id="todos"></ul>
+    <div class="overlay" style="display: none;"></div>
+    <div class="confirm_prompt" style="display: none;"></div>
     <script id="todos_template" type="text/x-handlebars-template">
       {{#each todos}}
         <li data-id="{{id}}">{{title}} <span class="remove"></span></li>
       {{/each}}
     </script>
     <script id="confirm_template" type="text/x-handlebars-template">
-      <div class="confirm_wrapper" data-id="{{id}}}">
+      <div class="confirm_wrapper" data-id="{{id}}">
         <p>Are you sure you want to delete this todo?</p>
       </div>
       <div class="actions">
