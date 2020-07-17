@@ -117,3 +117,26 @@ a.confirm_yes {
 a.confirm_no {
   background: #289f37;
 }
+
+.context_menu {
+  display: none;
+  width: 200px;
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.context_menu li:first-child {
+  border-top: none;
+}
+.context_menu li {
+  margin-left: 0;
+  height: 30px;
+  border-top: 1px solid #fff;
+  padding: 12px 0 0 10px;
+  cursor: pointer;
+}
+
+.context_menu ul {
+  list-style: none;
+  padding: 0px;
+}
