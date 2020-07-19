@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Cars for Sale</title>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script src="cars.js"></script>
+    <link rel="stylesheet" href="whitespace-reset.css">
+    <link rel="stylesheet" href="app.css">
+  </head>
+  <body>
+    <header>
+      <h1>Buy Used Cars</h1>
+      <div id="filters"></div>
+    </header>
+    <main>
+      <div id="cars"></div>
+    </main>
+    <script id="filters_template" type="text/x-handlbars-template">
+      <label for="make_select">Make</label>
+      <select id="make_select" name="make">
+        <option value="">All</option>
+        {{#each makes}}
+          <option value={{.}}>{{.}}</option>
+        {{/each}}
+      </select>
+
+      <label for="model_select">Model</label>
+      <select id="model_select" name="model">
+        <option value="">All</option>
+        {{#each models}}
+          <option value={{.}}>{{.}}</option>
+        {{/each}}
+      </select>
+
+      <label for="price_select">Price</label>
+      <select id="price_select" name="price">
+        <option value="">All</option>
+        {{#each prices}}
+          <option value={{.}}>{{.}}</option>
+        {{/each}}
+      </select>
+
+      <label for="year_select">Year</label>
+      <select id="year_select" name="year">
+        <option value="">All</option>
+        {{#each years}}
+          <option value={{.}}>{{.}}</option>
+        {{/each}}
+      </select>
+
+      <button class="filter_btn">Filter</button>
+    </script>
+    <script id="cars_template" type="text/x-handlbars-template">
+      {{#each cars}}
+        {{> car_partial }}
+      {{/each}}
+    </script>
+    <script id="car_partial" type="text/x-handlbars-template">
+      <div class="car">
+        <figure>
+          <img src="{{image}}">
+        </figure>
+        <h2>{{make}} {{model}}</h2>
+        <p class="year">Year: {{year}}</p>
+        <p class="price">Price: {{price}}</p>
+        <a href="#">Buy</a>
+      </div>
+    </script>
+  </body>
+</html>

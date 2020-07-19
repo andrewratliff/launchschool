@@ -55,7 +55,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const top = event.clientY;
       const id = event.target.dataset.id;
 
-      displayContextMenu({ left: left, top: top }, id);
+      console.log(left);
+      console.log(top);
+
+      displayContextMenu({ left, top }, id);
     }
   })
 
@@ -87,8 +90,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function displayContextMenu(coords, id) {
     hideContextMenu();
+
+    console.log(coords);
     contextMenu.innerHTML = contextMenuTemplate({ id: id });
-    contextMenu.style.offset = coords;
+    contextMenu.style.top = coords.top;
+    contextMenu.style.left = coords.left;
     contextMenu.style.display = 'block';
 
     document.querySelector('li.remove').addEventListener('click', event => {

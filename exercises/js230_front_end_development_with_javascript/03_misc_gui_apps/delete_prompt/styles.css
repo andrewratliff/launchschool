@@ -16,7 +16,7 @@ ul {
   width: 600px;
 }
 
-li {
+#todos li {
     padding: 16px 20px 0 20px;
     box-sizing: border-box;
     background: #fff;
