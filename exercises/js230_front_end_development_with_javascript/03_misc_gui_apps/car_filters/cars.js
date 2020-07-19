@@ -1,5 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
-  Handlebars.registerPartial('car_partial', document.getElementById('car_partial').innerHTML);
+(function () {
   const cars = [
     { make: 'Honda', image: 'images/honda-accord-2005.jpg', model: 'Accord', year: 2005, price: 7000 },
     { make: 'Honda', image: 'images/honda-accord-2008.jpg', model: 'Accord', year: 2008, price: 11000 },
@@ -10,59 +9,80 @@ document.addEventListener('DOMContentLoaded', () => {
     { make: 'Audi', image: 'images/audi-a4-2013.jpg', model: 'A4', year: 2013, price: 26000 },
   ];
 
-  displayFilters();
-  displayCars(cars);
-
-  document.querySelector('.filter_btn').addEventListener('click', () => {
-    const make = document.getElementById('make_select').value;
-    const model = document.getElementById('model_select').value;
-    const price = document.getElementById('price_select').value;
-    const year = document.getElementById('year_select').value;
-
-    const filters = {};
-
-    if (make) {
-      filters.make = make;
-    }
-
-    if (model) {
-      filters.model = model;
-    }
-
-    if (price) {
-      filters.price = price;
-    }
-
-    if (year) {
-      filters.year= year;
-    }
-
-    const filteredCars = cars.filter(car => {
-      return Object.keys(filters).every(key => {
-        return filters[key] === car[key];
+  class App {
+    constructor() {
+      this.resetFilters(cars);
+      this.displayCars(cars);
+      this.bindFilterEvent();
+      document.getElementById('reset_btn').addEventListener('click', () => {
+        new App();
       })
-    })
-
-    displayCars(filteredCars);
-  });
-
-  function displayFilters() {
-    const filtersTemplateSource = document.getElementById('filters_template');
-    const filtersTemplate = Handlebars.compile(filtersTemplateSource.innerHTML);
-    const filters = {
-      makes: new Set(cars.map(car => car.make)),
-      models: new Set(cars.map(car => car.model)),
-      prices: new Set(cars.map(car => car.year)),
-      years: new Set(cars.map(car => car.price)),
     }
 
-    document.getElementById('filters').innerHTML = filtersTemplate(filters);
+    bindFilterEvent() {
+      document.querySelector('.filter_btn').addEventListener('click', () => {
+        const make = document.getElementById('make_select').value;
+        const model = document.getElementById('model_select').value;
+        const price = parseInt(document.getElementById('price_select').value, 10);
+        const year = parseInt(document.getElementById('year_select').value, 10);
+
+        const filters = {};
+
+        if (make) {
+          filters.make = make;
+        }
+
+        if (model) {
+          filters.model = model;
+        }
+
+        if (price) {
+          filters.price = price;
+        }
+
+        if (year) {
+          filters.year= year;
+        }
+
+        const filteredCars = cars.filter(car => {
+          return Object.keys(filters).every(key => {
+            return filters[key] === car[key];
+          })
+        })
+
+        this.displayCars(filteredCars);
+        this.updateFilters(filteredCars);
+      });
+    }
+
+    updateFilters(filteredCars) {
+
+    }
+
+    resetFilters(filteredCars) {
+      const filtersTemplateSource = document.getElementById('filters_template');
+      const filtersTemplate = Handlebars.compile(filtersTemplateSource.innerHTML);
+      const filters = {
+        makes: new Set(filteredCars.map(car => car.make)),
+        models: new Set(filteredCars.map(car => car.model)),
+        prices: new Set(filteredCars.map(car => car.price)),
+        years: new Set(filteredCars.map(car => car.year)),
+      }
+
+      document.getElementById('filters').innerHTML = filtersTemplate(filters);
+    }
+
+    displayCars(filteredCars) {
+      const carsTemplateSource = document.getElementById('cars_template');
+      const carsTemplate = Handlebars.compile(carsTemplateSource.innerHTML);
+
+      document.getElementById('cars').innerHTML = carsTemplate({ cars: filteredCars });
+    }
   }
 
-  function displayCars(filteredCars) {
-    const carsTemplateSource = document.getElementById('cars_template');
-    const carsTemplate = Handlebars.compile(carsTemplateSource.innerHTML);
+  document.addEventListener('DOMContentLoaded', () => {
+    Handlebars.registerPartial('car_partial', document.getElementById('car_partial').innerHTML);
 
-    document.getElementById('cars').innerHTML = carsTemplate({ cars: filteredCars });
-  }
-});
+    new App();
+  });
+})();
